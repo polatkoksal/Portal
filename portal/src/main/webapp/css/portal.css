@@ -1,0 +1,56 @@
+.x-tab-bar-default {
+	background-color: #7186A3;
+	border-color: #7186A3;
+}
+
+.x-panel-header-default {
+	background-color: #7186A3;
+	border-color: #7186A3;
+}
+
+.x-panel-default {
+	border-color: #7186A3;
+	background-color: #7186A3;
+}
+
+.x-tab-default .x-tab-inner {
+	color: #ADD2ED;
+}
+
+.x-tab-default-active .x-tab-inner {
+	color: #55657C;
+}
+
+.x-panel-body-default {
+	border-color: #7186A3;
+}
+
+.x-tab-default {
+	border-color: transparent;
+}
+
+.x-tab-default-top {
+	background-color: #55657C;
+	border-bottom-color: #ADD2ED;
+}
+
+.x-tab-active {
+	background-color: #ADD2ED;
+}
+
+.x-window-default {
+	border-color: #7186A3;
+}
+
+.x-window-header-default-top {
+	background-color: #7186A3;
+}
+
+.x-window-header-default {
+	border-color: #7186A3;
+}
+
+.x-grid-cell-inner {
+	white-space: normal;
+	word-wrap: break-word;
+}
