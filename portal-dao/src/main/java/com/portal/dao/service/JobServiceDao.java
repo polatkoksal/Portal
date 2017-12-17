@@ -275,11 +275,29 @@ public class JobServiceDao implements IJobServiceDao {
 	public Boolean deleteFaiDfaiJob(Integer id) {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
+		Query query = em
+				.createQuery("select u from FaiControlList u where u.faiJob.id =:id");
+		query.setParameter("id", id);
+		List<FaiControlList> controlLists = query.getResultList();
+		et.begin();
+		for (FaiControlList a : controlLists) {
+			FaiControlList c = em.find(FaiControlList.class, a.getId());
+			em.remove(c);
+		}
+		et.commit();
 		et.begin();
 		FaiDfaiJob faiDfaiJob = em.find(FaiDfaiJob.class, id);
 		em.remove(faiDfaiJob);
 		et.commit();
 		return true;
+	}
+
+	private void deleteFaiControlList(Integer faiId) {
+		em = this.getEntityManager();
+		Query query = em
+				.createQuery("delete u from FaiControlList u where u.faiJob.id =:id");
+		query.setParameter("id", faiId);
+		query.executeUpdate();
 	}
 
 	@Override
