@@ -1,11 +1,11 @@
 Ext.define('Portal.store.FaiDfaiJobStore', {
 	extend : 'Ext.data.Store',
 	fields : [ 'id', 'partNumber', 'drpNumber', 'projectName', 'category',
-			'period', 'khCode', 'machineCode', 'setupApResp', 'setupApRespId',
-			'fixtureStart', 'fixtureEnd', 'fixturePercentage', 'catiaStart',
-			'catiaEnd', 'catiaPercentage', 'documentStart', 'documentEnd',
-			'documentPercentage', 'benchStart', 'benchEnd', 'benchPercentage',
-			'description', 'nameSurname', 'responsibleId' ],
+			'period', 'khCode', 'machineCode', 'fixtureStart', 'fixtureEnd',
+			'fixturePercentage', 'catiaStart', 'catiaEnd', 'catiaPercentage',
+			'documentStart', 'documentEnd', 'documentPercentage', 'benchStart',
+			'benchEnd', 'benchPercentage', 'description', 'nameSurname',
+			'responsibleId' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getFaiDfaiJobs',

@@ -398,7 +398,6 @@ public class WebHandler {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		FaiDfaiJob fdj = new FaiDfaiJob();
 		Integer id;
-		Integer setId;
 
 		if (request.getParameter("id") != null
 				&& !"".equals(request.getParameter("id"))) {
@@ -425,9 +424,8 @@ public class WebHandler {
 		fdj.setFixtureStart(sdf.parse(request.getParameter("fixtureStart")));
 		fdj.setPartNumber(request.getParameter("partNumber"));
 		id = Integer.valueOf(request.getParameter("responsible"));
-		setId = Integer.valueOf(request.getParameter("setupApRespId"));
 
-		jobServiceDao.createUpdateFaiDfaiJob(id, setId, fdj);
+		jobServiceDao.createUpdateFaiDfaiJob(id, fdj);
 
 		response.setStatus(HttpServletResponse.SC_OK);
 		try (PrintWriter out = response.getWriter()) {
@@ -441,6 +439,7 @@ public class WebHandler {
 		response.setCharacterEncoding("UTF-8");
 		FaiControlList i = new FaiControlList();
 		Integer faiJobId = null;
+		Integer setId = null;
 
 		if (request.getParameter("id") != null
 				&& !"".equals(request.getParameter("id"))) {
@@ -451,6 +450,14 @@ public class WebHandler {
 			faiJobId = Integer.valueOf(request.getParameter("faiJobId"));
 		}
 
+		if (request.getParameter("setupApRespId") != null
+				&& !"".equals(request.getParameter("setupApRespId"))) {
+			setId = Integer.valueOf(request.getParameter("setupApRespId"));
+		}
+		i.setListNumber(request.getParameter("listNumber") != null
+				&& !"".equals(request.getParameter("listNumber")) ? Integer
+				.valueOf(request.getParameter("listNumber")) : null);
+		i.setOperationCode(request.getParameter("operationCode"));
 		i.setCv11(request.getParameter("cv11") != null ? true : false);
 		i.setCv12(request.getParameter("cv12") != null ? true : false);
 		i.setCv13(request.getParameter("cv13") != null ? true : false);
@@ -487,7 +494,7 @@ public class WebHandler {
 		i.setTa11(request.getParameter("ta11") != null ? true : false);
 		i.setTa12(request.getParameter("ta12") != null ? true : false);
 
-		jobServiceDao.createUpdateFaiControlList(i, faiJobId);
+		jobServiceDao.createUpdateFaiControlList(i, faiJobId, setId);
 
 		response.setStatus(HttpServletResponse.SC_OK);
 		try (PrintWriter out = response.getWriter()) {
@@ -568,10 +575,6 @@ public class WebHandler {
 			fI.setProjectName(f.getProjectName());
 			fI.setCategory(f.getCategory());
 			fI.setPeriod(f.getPeriod());
-			if (f.getSetupApResp() != null) {
-				fI.setSetupApResp(f.getSetupApResp().getName() + " "
-						+ f.getSetupApResp().getLastName());
-			}
 			fI.setBenchEnd(sdf.format((f.getBenchEnd())));
 			fI.setBenchPercentage(f.getBenchPercentage());
 			fI.setBenchStart(sdf.format(f.getBenchStart()));
@@ -591,9 +594,6 @@ public class WebHandler {
 					+ f.getResponsible().getLastName());
 			fI.setResponsibleId(f.getResponsible().getId());
 			fI.setPartNumber(f.getPartNumber());
-			if (f.getSetupApResp() != null) {
-				fI.setSetupApRespId(f.getSetupApResp().getId());
-			}
 			faiDfaiJobItems.add(fI);
 		}
 		ResultData<FaiDfaiJobItem> resultData = new ResultData<FaiDfaiJobItem>();
@@ -609,13 +609,19 @@ public class WebHandler {
 		response.setCharacterEncoding("UTF-8");
 
 		Integer faiJobId = null;
+		Integer listNumber = null;
 		if (request.getParameter("faiJobId") != null
 				&& !request.getParameter("faiJobId").isEmpty()) {
 			faiJobId = Integer.valueOf(request.getParameter("faiJobId"));
 		}
 
-		List<FaiControlList> faiControlList = jobServiceDao
-				.getFaiControlList(faiJobId);
+		if (request.getParameter("listNumber") != null
+				&& !request.getParameter("listNumber").isEmpty()) {
+			listNumber = Integer.valueOf(request.getParameter("listNumber"));
+		}
+
+		List<FaiControlList> faiControlList = jobServiceDao.getFaiControlList(
+				faiJobId, listNumber);
 
 		List<FaiControlListItem> faiControlListItems = new ArrayList<FaiControlListItem>();
 		FaiControlListItem i;
@@ -626,6 +632,11 @@ public class WebHandler {
 			if (f.getFaiJob() != null) {
 				i.setFaiJobId(f.getFaiJob().getId());
 			}
+			if (f.getSetupApResp() != null) {
+				i.setSetupApRespId(f.getSetupApResp().getId());
+			}
+			i.setListNumber(f.getListNumber());
+			i.setOperationCode(f.getOperationCode());
 			i.setCv11(f.getCv11());
 			i.setCv12(f.getCv12());
 			i.setCv13(f.getCv13());
@@ -740,10 +751,10 @@ public class WebHandler {
 			fI.setProjectName(f.getProjectName());
 			fI.setCategory(f.getCategory());
 			fI.setPeriod(f.getPeriod());
-			if (f.getSetupApResp() != null) {
-				fI.setSetupApResp(f.getSetupApResp().getName() + " "
-						+ f.getSetupApResp().getLastName());
-			}
+			// if (f.getSetupApResp() != null) {
+			// fI.setSetupApResp(f.getSetupApResp().getName() + " "
+			// + f.getSetupApResp().getLastName());
+			// }
 			fI.setBenchEnd(sdf.format((f.getBenchEnd())));
 			fI.setBenchPercentage(f.getBenchPercentage());
 			fI.setBenchStart(sdf.format(f.getBenchStart()));
@@ -763,9 +774,9 @@ public class WebHandler {
 					+ f.getResponsible().getLastName());
 			fI.setResponsibleId(f.getResponsible().getId());
 			fI.setPartNumber(f.getPartNumber());
-			if (f.getSetupApResp() != null) {
-				fI.setSetupApRespId(f.getSetupApResp().getId());
-			}
+			// if (f.getSetupApResp() != null) {
+			// fI.setSetupApRespId(f.getSetupApResp().getId());
+			// }
 			if (f.getDoneDate() != null) {
 				fI.setDoneDate(sdf.format(f.getDoneDate()));
 			}

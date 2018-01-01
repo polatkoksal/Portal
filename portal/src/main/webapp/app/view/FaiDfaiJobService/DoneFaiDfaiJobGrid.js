@@ -32,10 +32,6 @@ Ext.define('Portal.view.FaiDfaiJobService.DoneFaiDfaiJobGrid', {
 		dataIndex : 'machineCode',
 		width : 80
 	}, {
-		header : 'Setup Ap. Resp.',
-		dataIndex : 'setupApResp',
-		width : 80
-	}, {
 		header : 'Fixture Start',
 		dataIndex : 'fixtureStart',
 		width : 70

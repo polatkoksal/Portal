@@ -59,19 +59,6 @@ Ext.define('Portal.view.FaiDfaiJobService.FaiDfaiJobAddForm', {
 		margin : '4px',
 		width : 500
 	}, {
-		xtype : 'combobox',
-		fieldLabel : 'Setup Ap. Resp.',
-		id : 'faiDfaiSetupApResp',
-		name : 'setupApRespId',
-		store : 'ComboUserStore',
-		displayField : 'nameSurname',
-		valueField : 'id',
-		editable : false,
-		allowBlank : false,
-		emptyText : 'Select Setup Ap. Resp.',
-		margin : '4px',
-		width : 500
-	}, {
 		xtype : 'container',
 		layout : 'hbox',
 		items : [ {

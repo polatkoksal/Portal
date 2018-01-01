@@ -52,7 +52,7 @@ public class JobServiceDao implements IJobServiceDao {
 	}
 
 	@Override
-	public Boolean createUpdateFaiDfaiJob(Integer responsibleId, Integer setId,
+	public Boolean createUpdateFaiDfaiJob(Integer responsibleId,
 			FaiDfaiJob faiDfaiJob) {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
@@ -60,8 +60,6 @@ public class JobServiceDao implements IJobServiceDao {
 		User u = em.find(User.class, responsibleId);
 		faiDfaiJob.setResponsible(u);
 
-		User setUser = em.find(User.class, setId);
-		faiDfaiJob.setSetupApResp(setUser);
 		faiDfaiJob.setJobState("undone");
 
 		if (faiDfaiJob.getId() == null) {
@@ -75,12 +73,15 @@ public class JobServiceDao implements IJobServiceDao {
 
 	@Override
 	public Boolean createUpdateFaiControlList(FaiControlList faiControlList,
-			Integer faiJobId) {
+			Integer faiJobId, Integer setId) {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		FaiDfaiJob u = em.find(FaiDfaiJob.class, faiJobId);
 		faiControlList.setFaiJob(u);
+
+		User setUser = em.find(User.class, setId);
+		faiControlList.setSetupApResp(setUser);
 
 		if (faiControlList.getId() == null) {
 			em.persist(faiControlList);
@@ -131,12 +132,19 @@ public class JobServiceDao implements IJobServiceDao {
 	}
 
 	@Override
-	public List<FaiControlList> getFaiControlList(Integer faiJobId) {
+	public List<FaiControlList> getFaiControlList(Integer faiJobId,
+			Integer listNumber) {
 		em = this.getEntityManager();
 
 		String parms = "";
 		if (faiJobId != null) {
 			parms = "where u.faiJob.id =:faiJobId ";
+		}
+
+		if (listNumber != null && listNumber == 1) {
+			parms += "and (u.listNumber =:listNumber or u.listNumber is null) ";
+		} else if (listNumber != null) {
+			parms += "and u.listNumber =:listNumber ";
 		}
 
 		String qString = "select u from FaiControlList u " + parms
@@ -146,6 +154,10 @@ public class JobServiceDao implements IJobServiceDao {
 
 		if (faiJobId != null) {
 			query.setParameter("faiJobId", faiJobId);
+		}
+
+		if (listNumber != null) {
+			query.setParameter("listNumber", listNumber);
 		}
 
 		List<FaiControlList> faiControlList = query.getResultList();

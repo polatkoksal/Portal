@@ -33,10 +33,6 @@ Ext.define('Portal.view.FaiDfaiJobService.FaiDfaiJobGrid', {
 		dataIndex : 'machineCode',
 		width : 80
 	}, {
-		header : 'Setup Ap. Resp.',
-		dataIndex : 'setupApResp',
-		width : 80
-	}, {
 		header : 'Fixture Start',
 		dataIndex : 'fixtureStart',
 		width : 70
@@ -149,7 +145,13 @@ Ext.define('Portal.view.FaiDfaiJobService.FaiDfaiJobGrid', {
 				if (role == 'PM') {
 					Ext.ComponentQuery.query('#faiDfaiAddSave2')[0]
 							.setVisible(false);
-					Ext.ComponentQuery.query('#faiControlListOpen')[0]
+					Ext.ComponentQuery.query('#faiControlListOpen1')[0]
+							.setVisible(false);
+					Ext.ComponentQuery.query('#faiControlListOpen2')[0]
+							.setVisible(false);
+					Ext.ComponentQuery.query('#faiControlListOpen3')[0]
+							.setVisible(false);
+					Ext.ComponentQuery.query('#faiControlListOpen4')[0]
 							.setVisible(false);
 				}
 				var comboUserStore = Ext.data.StoreManager

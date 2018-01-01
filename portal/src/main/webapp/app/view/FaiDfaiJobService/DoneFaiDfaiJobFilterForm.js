@@ -89,8 +89,8 @@ Ext
 							},
 							{
 								xtype : 'button',
-								id : 'showDoneFaiControlList',
-								text : 'Fai Control List',
+								id : 'showDoneFaiControlList1',
+								text : 'Fai Control List 1',
 								margin : '4px',
 								handler : function() {
 									var grid = Ext.ComponentQuery
@@ -103,7 +103,7 @@ Ext
 											tabPanel.add({
 												xtype : 'faicontrollistform',
 												id : 'faiControlListForm',
-												title : 'FAI Control List',
+												title : 'FAI Control List 1',
 												closable : true
 											})
 											var faiJobId = grid
@@ -114,6 +114,188 @@ Ext
 													.get("FaiControlListStore");
 											store.getProxy().setExtraParam(
 													'faiJobId', faiJobId);
+											store.getProxy().setExtraParam(
+													'listNumber', 1);
+											store
+													.load({
+														callback : function() {
+															var record = store
+																	.findRecord(
+																			'faiJobId',
+																			faiJobId);
+															if (record != null) {
+																Ext.ComponentQuery
+																		.query('#faiControlListForm')[0]
+																		.loadRecord(record);
+															}
+														}
+													});
+											Ext.ComponentQuery
+													.query('#faiCtrlHiddenFaiJobId')[0]
+													.setValue(faiJobId);
+											Ext.ComponentQuery
+													.query('#faiCtrlSave')[0]
+													.setVisible(false);
+										}
+										tabPanel
+												.setActiveTab("faiControlListForm");
+									} else {
+										Ext.Msg
+												.alert('Warning',
+														'You should select a done Fai/DFai job.');
+									}
+								}
+
+							},
+							{
+								xtype : 'button',
+								id : 'showDoneFaiControlList2',
+								text : 'Fai Control List 2',
+								margin : '4px',
+								handler : function() {
+									var grid = Ext.ComponentQuery
+											.query('donefaidfaijobgrid')[0];
+									if (grid.getSelectionModel().hasSelection()) {
+										var tabPanel = Ext.ComponentQuery
+												.query('tabpanel')[0];
+										if (!tabPanel
+												.getChildByElement('faiControlListForm')) {
+											tabPanel.add({
+												xtype : 'faicontrollistform',
+												id : 'faiControlListForm',
+												title : 'FAI Control List 2',
+												closable : true
+											})
+											var faiJobId = grid
+													.getSelectionModel()
+													.getSelection()[0]
+													.get('id');
+											var store = Ext.data.StoreManager
+													.get("FaiControlListStore");
+											store.getProxy().setExtraParam(
+													'faiJobId', faiJobId);
+											store.getProxy().setExtraParam(
+													'listNumber', 2);
+											store
+													.load({
+														callback : function() {
+															var record = store
+																	.findRecord(
+																			'faiJobId',
+																			faiJobId);
+															if (record != null) {
+																Ext.ComponentQuery
+																		.query('#faiControlListForm')[0]
+																		.loadRecord(record);
+															}
+														}
+													});
+											Ext.ComponentQuery
+													.query('#faiCtrlHiddenFaiJobId')[0]
+													.setValue(faiJobId);
+											Ext.ComponentQuery
+													.query('#faiCtrlSave')[0]
+													.setVisible(false);
+										}
+										tabPanel
+												.setActiveTab("faiControlListForm");
+									} else {
+										Ext.Msg
+												.alert('Warning',
+														'You should select a done Fai/DFai job.');
+									}
+								}
+
+							},
+							{
+								xtype : 'button',
+								id : 'showDoneFaiControlList3',
+								text : 'Fai Control List 3',
+								margin : '4px',
+								handler : function() {
+									var grid = Ext.ComponentQuery
+											.query('donefaidfaijobgrid')[0];
+									if (grid.getSelectionModel().hasSelection()) {
+										var tabPanel = Ext.ComponentQuery
+												.query('tabpanel')[0];
+										if (!tabPanel
+												.getChildByElement('faiControlListForm')) {
+											tabPanel.add({
+												xtype : 'faicontrollistform',
+												id : 'faiControlListForm',
+												title : 'FAI Control List 3',
+												closable : true
+											})
+											var faiJobId = grid
+													.getSelectionModel()
+													.getSelection()[0]
+													.get('id');
+											var store = Ext.data.StoreManager
+													.get("FaiControlListStore");
+											store.getProxy().setExtraParam(
+													'faiJobId', faiJobId);
+											store.getProxy().setExtraParam(
+													'listNumber', 3);
+											store
+													.load({
+														callback : function() {
+															var record = store
+																	.findRecord(
+																			'faiJobId',
+																			faiJobId);
+															if (record != null) {
+																Ext.ComponentQuery
+																		.query('#faiControlListForm')[0]
+																		.loadRecord(record);
+															}
+														}
+													});
+											Ext.ComponentQuery
+													.query('#faiCtrlHiddenFaiJobId')[0]
+													.setValue(faiJobId);
+											Ext.ComponentQuery
+													.query('#faiCtrlSave')[0]
+													.setVisible(false);
+										}
+										tabPanel
+												.setActiveTab("faiControlListForm");
+									} else {
+										Ext.Msg
+												.alert('Warning',
+														'You should select a done Fai/DFai job.');
+									}
+								}
+
+							},
+							{
+								xtype : 'button',
+								id : 'showDoneFaiControlList4',
+								text : 'Fai Control List 4',
+								margin : '4px',
+								handler : function() {
+									var grid = Ext.ComponentQuery
+											.query('donefaidfaijobgrid')[0];
+									if (grid.getSelectionModel().hasSelection()) {
+										var tabPanel = Ext.ComponentQuery
+												.query('tabpanel')[0];
+										if (!tabPanel
+												.getChildByElement('faiControlListForm')) {
+											tabPanel.add({
+												xtype : 'faicontrollistform',
+												id : 'faiControlListForm',
+												title : 'FAI Control List 4',
+												closable : true
+											})
+											var faiJobId = grid
+													.getSelectionModel()
+													.getSelection()[0]
+													.get('id');
+											var store = Ext.data.StoreManager
+													.get("FaiControlListStore");
+											store.getProxy().setExtraParam(
+													'faiJobId', faiJobId);
+											store.getProxy().setExtraParam(
+													'listNumber', 4);
 											store
 													.load({
 														callback : function() {

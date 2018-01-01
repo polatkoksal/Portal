@@ -14,7 +14,6 @@ public class FaiDfaiJobItem implements Serializable {
 	private String period;
 	private String khCode;
 	private String machineCode;
-	private String setupApResp;
 	private String fixtureStart;
 	private String fixtureEnd;
 	private String fixturePercentage;
@@ -31,7 +30,6 @@ public class FaiDfaiJobItem implements Serializable {
 	private String nameSurname;
 	private String doneDate;
 	private Integer responsibleId;
-	private Integer setupApRespId;
 
 	public Integer getId() {
 		return id;
@@ -79,14 +77,6 @@ public class FaiDfaiJobItem implements Serializable {
 
 	public void setMachineCode(String machineCode) {
 		this.machineCode = machineCode;
-	}
-
-	public String getSetupApResp() {
-		return setupApResp;
-	}
-
-	public void setSetupApResp(String setupApResp) {
-		this.setupApResp = setupApResp;
 	}
 
 	public String getFixtureStart() {
@@ -207,14 +197,6 @@ public class FaiDfaiJobItem implements Serializable {
 
 	public void setResponsibleId(Integer responsibleId) {
 		this.responsibleId = responsibleId;
-	}
-
-	public Integer getSetupApRespId() {
-		return setupApRespId;
-	}
-
-	public void setSetupApRespId(Integer setupApRespId) {
-		this.setupApRespId = setupApRespId;
 	}
 
 	public String getDoneDate() {

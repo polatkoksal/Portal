@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,9 +23,19 @@ public class FaiControlList implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "faiJob")
 	private FaiDfaiJob faiJob;
+
+	@ManyToOne
+	@JoinColumn(name = "setupApResp")
+	private User setupApResp;
+
+	@Column(name = "list_number")
+	private Integer listNumber;
+
+	@Column(name = "operation_code")
+	private String operationCode;
 
 	@Column(name = "cv11")
 	private Boolean cv11;
@@ -133,6 +144,30 @@ public class FaiControlList implements Serializable {
 
 	public void setFaiJob(FaiDfaiJob faiJob) {
 		this.faiJob = faiJob;
+	}
+
+	public User getSetupApResp() {
+		return setupApResp;
+	}
+
+	public void setSetupApResp(User setupApResp) {
+		this.setupApResp = setupApResp;
+	}
+
+	public Integer getListNumber() {
+		return listNumber;
+	}
+
+	public void setListNumber(Integer listNumber) {
+		this.listNumber = listNumber;
+	}
+
+	public String getOperationCode() {
+		return operationCode;
+	}
+
+	public void setOperationCode(String operationCode) {
+		this.operationCode = operationCode;
 	}
 
 	public Boolean getCv11() {

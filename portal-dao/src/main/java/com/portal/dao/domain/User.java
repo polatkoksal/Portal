@@ -54,7 +54,7 @@ public class User implements Serializable {
 	private List<FaiDfaiJob> faiDfaiJobs;
 
 	@OneToMany(mappedBy = "setupApResp")
-	private List<FaiDfaiJob> setupFaiDfaiJob;
+	private List<FaiControlList> setupFaiControlList;
 
 	@OneToMany(mappedBy = "responsible")
 	private List<OtherJob> otherJobs;
@@ -166,12 +166,12 @@ public class User implements Serializable {
 		this.userSkills = userSkills;
 	}
 
-	public List<FaiDfaiJob> getSetupFaiDfaiJob() {
-		return setupFaiDfaiJob;
+	public List<FaiControlList> getSetupFaiControlList() {
+		return setupFaiControlList;
 	}
 
-	public void setSetupFaiDfaiJob(List<FaiDfaiJob> setupFaiDfaiJob) {
-		this.setupFaiDfaiJob = setupFaiDfaiJob;
+	public void setSetupFaiControlList(List<FaiControlList> setupFaiControlList) {
+		this.setupFaiControlList = setupFaiControlList;
 	}
 
 }

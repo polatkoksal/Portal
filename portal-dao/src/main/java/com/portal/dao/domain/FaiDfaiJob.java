@@ -2,6 +2,7 @@ package com.portal.dao.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -105,12 +107,8 @@ public class FaiDfaiJob implements Serializable {
 	@JoinColumn(name = "responsible")
 	private User responsible;
 
-	@ManyToOne
-	@JoinColumn(name = "setupApResp")
-	private User setupApResp;
-
-	@OneToOne(mappedBy = "faiJob")
-	private FaiControlList controlList;
+	@OneToMany(mappedBy = "faiJob")
+	private List<FaiControlList> controlLists;
 
 	public Integer getId() {
 		return id;
@@ -280,14 +278,6 @@ public class FaiDfaiJob implements Serializable {
 		this.responsible = responsible;
 	}
 
-	public User getSetupApResp() {
-		return setupApResp;
-	}
-
-	public void setSetupApResp(User setupApResp) {
-		this.setupApResp = setupApResp;
-	}
-
 	public Date getDoneDate() {
 		return doneDate;
 	}
@@ -312,12 +302,12 @@ public class FaiDfaiJob implements Serializable {
 		this.period = period;
 	}
 
-	public FaiControlList getControlList() {
-		return controlList;
+	public List<FaiControlList> getControlLists() {
+		return controlLists;
 	}
 
-	public void setControlList(FaiControlList controlList) {
-		this.controlList = controlList;
+	public void setControlLists(List<FaiControlList> controlLists) {
+		this.controlLists = controlLists;
 	}
 
 }

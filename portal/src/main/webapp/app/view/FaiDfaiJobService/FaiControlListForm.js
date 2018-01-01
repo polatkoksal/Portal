@@ -19,6 +19,11 @@ Ext
 								name : 'faiJobId'
 							},
 							{
+								xtype : 'hiddenfield',
+								id : 'faiCtrlHiddenListNumber',
+								name : 'listNumber'
+							},
+							{
 								xtype : 'container',
 								layout : 'vbox',
 								items : [
@@ -27,6 +32,32 @@ Ext
 											text : 'BASLANGIC / OFiS KONTROLLERi',
 											margin : '10 10 10 10',
 											style : 'font-size: 20px; font-weight: bold;'
+										},
+										{
+											xtype : 'textfield',
+											fieldLabel : 'Operasyon Kodu',
+											id : 'faiCtrlOpCode',
+											name : 'operationCode',
+											margin : '10 10 10 10',
+											labelStyle : 'font-size: 14px; font-weight: bold;',
+											width : 400,
+											labelWidth : 150
+										},
+										{
+											xtype : 'combobox',
+											fieldLabel : 'Setup Ap. Resp.',
+											id : 'faiCtrlSetupApResp',
+											name : 'setupApRespId',
+											store : 'ComboUserStore',
+											displayField : 'nameSurname',
+											valueField : 'id',
+											editable : false,
+											allowBlank : false,
+											emptyText : 'Select Setup Ap. Resp.',
+											labelStyle : 'font-size: 14px; font-weight: bold;',
+											margin : '10 10 10 10',
+											width : 400,
+											labelWidth : 150
 										},
 										{
 											xtype : 'label',

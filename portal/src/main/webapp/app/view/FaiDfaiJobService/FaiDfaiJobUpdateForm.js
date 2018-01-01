@@ -85,20 +85,6 @@ Ext
 														width : 500
 													},
 													{
-														xtype : 'combobox',
-														fieldLabel : 'Setup Ap. Resp.',
-														id : 'faiDfaiSetupApResp2',
-														name : 'setupApRespId',
-														store : 'ComboUserStore',
-														displayField : 'nameSurname',
-														valueField : 'id',
-														editable : false,
-														allowBlank : false,
-														emptyText : 'Select Setup Ap. Resp.',
-														margin : '4px',
-														width : 500
-													},
-													{
 														xtype : 'container',
 														layout : 'hbox',
 														items : [
@@ -351,8 +337,8 @@ Ext
 																},
 																{
 																	xtype : 'button',
-																	id : 'faiControlListOpen',
-																	text : 'FAI Control List',
+																	id : 'faiControlListOpen1',
+																	text : 'FAI Control List 1',
 																	margin : '4px',
 																	handler : function() {
 																		var tabPanel = Ext.ComponentQuery
@@ -363,7 +349,7 @@ Ext
 																					.add({
 																						xtype : 'faicontrollistform',
 																						id : 'faiControlListForm',
-																						title : 'FAI Control List',
+																						title : 'FAI Control List 1',
 																						closable : true
 																					})
 																			var faiJobId = Ext.ComponentQuery
@@ -376,6 +362,11 @@ Ext
 																					.setExtraParam(
 																							'faiJobId',
 																							faiJobId);
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'listNumber',
+																							1);
 																			store
 																					.load({
 																						callback : function() {
@@ -393,6 +384,180 @@ Ext
 																			Ext.ComponentQuery
 																					.query('#faiCtrlHiddenFaiJobId')[0]
 																					.setValue(faiJobId);
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenListNumber')[0]
+																					.setValue(1);
+																		}
+																		tabPanel
+																				.setActiveTab("faiControlListForm");
+																	}
+																},
+																{
+																	xtype : 'button',
+																	id : 'faiControlListOpen2',
+																	text : 'FAI Control List 2',
+																	margin : '4px',
+																	handler : function() {
+																		var tabPanel = Ext.ComponentQuery
+																				.query('tabpanel')[0];
+																		if (!tabPanel
+																				.getChildByElement('faiControlListForm')) {
+																			tabPanel
+																					.add({
+																						xtype : 'faicontrollistform',
+																						id : 'faiControlListForm',
+																						title : 'FAI Control List 2',
+																						closable : true
+																					})
+																			var faiJobId = Ext.ComponentQuery
+																					.query('#faiDfaiHiddenId2')[0]
+																					.getValue();
+																			var store = Ext.data.StoreManager
+																					.get("FaiControlListStore");
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'faiJobId',
+																							faiJobId);
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'listNumber',
+																							2);
+																			store
+																					.load({
+																						callback : function() {
+																							var record = store
+																									.findRecord(
+																											'faiJobId',
+																											faiJobId);
+																							if (record != null) {
+																								Ext.ComponentQuery
+																										.query('#faiControlListForm')[0]
+																										.loadRecord(record);
+																							}
+																						}
+																					});
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenFaiJobId')[0]
+																					.setValue(faiJobId);
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenListNumber')[0]
+																					.setValue(2);
+																		}
+																		tabPanel
+																				.setActiveTab("faiControlListForm");
+																	}
+																},
+																{
+																	xtype : 'button',
+																	id : 'faiControlListOpen3',
+																	text : 'FAI Control List 3',
+																	margin : '4px',
+																	handler : function() {
+																		var tabPanel = Ext.ComponentQuery
+																				.query('tabpanel')[0];
+																		if (!tabPanel
+																				.getChildByElement('faiControlListForm')) {
+																			tabPanel
+																					.add({
+																						xtype : 'faicontrollistform',
+																						id : 'faiControlListForm',
+																						title : 'FAI Control List 3',
+																						closable : true
+																					})
+																			var faiJobId = Ext.ComponentQuery
+																					.query('#faiDfaiHiddenId2')[0]
+																					.getValue();
+																			var store = Ext.data.StoreManager
+																					.get("FaiControlListStore");
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'faiJobId',
+																							faiJobId);
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'listNumber',
+																							3);
+																			store
+																					.load({
+																						callback : function() {
+																							var record = store
+																									.findRecord(
+																											'faiJobId',
+																											faiJobId);
+																							if (record != null) {
+																								Ext.ComponentQuery
+																										.query('#faiControlListForm')[0]
+																										.loadRecord(record);
+																							}
+																						}
+																					});
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenFaiJobId')[0]
+																					.setValue(faiJobId);
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenListNumber')[0]
+																					.setValue(3);
+																		}
+																		tabPanel
+																				.setActiveTab("faiControlListForm");
+																	}
+																},
+																{
+																	xtype : 'button',
+																	id : 'faiControlListOpen4',
+																	text : 'FAI Control List 4',
+																	margin : '4px',
+																	handler : function() {
+																		var tabPanel = Ext.ComponentQuery
+																				.query('tabpanel')[0];
+																		if (!tabPanel
+																				.getChildByElement('faiControlListForm')) {
+																			tabPanel
+																					.add({
+																						xtype : 'faicontrollistform',
+																						id : 'faiControlListForm',
+																						title : 'FAI Control List 4',
+																						closable : true
+																					})
+																			var faiJobId = Ext.ComponentQuery
+																					.query('#faiDfaiHiddenId2')[0]
+																					.getValue();
+																			var store = Ext.data.StoreManager
+																					.get("FaiControlListStore");
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'faiJobId',
+																							faiJobId);
+																			store
+																					.getProxy()
+																					.setExtraParam(
+																							'listNumber',
+																							4);
+																			store
+																					.load({
+																						callback : function() {
+																							var record = store
+																									.findRecord(
+																											'faiJobId',
+																											faiJobId);
+																							if (record != null) {
+																								Ext.ComponentQuery
+																										.query('#faiControlListForm')[0]
+																										.loadRecord(record);
+																							}
+																						}
+																					});
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenFaiJobId')[0]
+																					.setValue(faiJobId);
+																			Ext.ComponentQuery
+																					.query('#faiCtrlHiddenListNumber')[0]
+																					.setValue(4);
 																		}
 																		tabPanel
 																				.setActiveTab("faiControlListForm");

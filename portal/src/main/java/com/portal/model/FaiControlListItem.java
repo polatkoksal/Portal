@@ -2,12 +2,17 @@ package com.portal.model;
 
 import java.io.Serializable;
 
+import com.portal.dao.domain.User;
+
 public class FaiControlListItem implements Serializable {
 
 	private static final long serialVersionUID = 900268712702599271L;
 
 	private Integer id;
 	private Integer faiJobId;
+	private Integer setupApRespId;
+	private Integer listNumber;
+	private String operationCode;
 	private Boolean cv11;
 	private Boolean cv12;
 	private Boolean cv13;
@@ -54,6 +59,30 @@ public class FaiControlListItem implements Serializable {
 
 	public void setFaiJobId(Integer faiJobId) {
 		this.faiJobId = faiJobId;
+	}
+
+	public Integer getSetupApRespId() {
+		return setupApRespId;
+	}
+
+	public void setSetupApRespId(Integer setupApRespId) {
+		this.setupApRespId = setupApRespId;
+	}
+
+	public Integer getListNumber() {
+		return listNumber;
+	}
+
+	public void setListNumber(Integer listNumber) {
+		this.listNumber = listNumber;
+	}
+
+	public String getOperationCode() {
+		return operationCode;
+	}
+
+	public void setOperationCode(String operationCode) {
+		this.operationCode = operationCode;
 	}
 
 	public Boolean getCv11() {

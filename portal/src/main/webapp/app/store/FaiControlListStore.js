@@ -4,7 +4,7 @@ Ext.define('Portal.store.FaiControlListStore', {
 			'nc11', 'nc12', 'nc13', 'nc14', 'se11', 'se12', 'ob11', 'ob12',
 			'se21', 'se22', 'se23', 'se24', 'no11', 'no12', 'cv21', 'cv22',
 			'nc21', 'ta11', 'ta12', 'ob21', 'ob22', 'ob23', 'fa11', 'fa12',
-			'fa13', 'fa14' ],
+			'fa13', 'fa14', 'operationCode', 'setupApRespId', 'listNumber' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getFaiControlList',
@@ -12,7 +12,8 @@ Ext.define('Portal.store.FaiControlListStore', {
 			read : 'POST',
 		},
 		extraParams : {
-			'faiJobId' : ''
+			'faiJobId' : '',
+			'listNumber' : ''
 		},
 		reader : {
 			type : 'json',

@@ -10,7 +10,7 @@ import com.portal.dao.domain.OtherJob;
 
 public interface IJobServiceDao {
 
-	public Boolean createUpdateFaiDfaiJob(Integer responsibleId, Integer setId,
+	public Boolean createUpdateFaiDfaiJob(Integer responsibleId,
 			FaiDfaiJob faiDfaiJob);
 
 	public Boolean createUpdateJobRequest(Integer responsibleId,
@@ -40,9 +40,10 @@ public interface IJobServiceDao {
 
 	public Boolean doneFaiDfaiJob(Integer id, Date doneDate);
 
-	public List<FaiControlList> getFaiControlList(Integer faiJobId);
+	public List<FaiControlList> getFaiControlList(Integer faiJobId,
+			Integer listNumber);
 
 	Boolean createUpdateFaiControlList(FaiControlList faiControlList,
-			Integer faiJobId);
+			Integer faiJobId, Integer setId);
 
 }
