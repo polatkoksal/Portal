@@ -72,13 +72,14 @@ Ext
 								name : 'cv11',
 								fieldLabel : '1- CATIA CAM HAZIR MI?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
 								id : 'faiCtrlCv12',
 								name : 'cv12',
-								fieldLabel : '2- VERICUT SIMULASYON KONTROLU YAPILDI MI?(NC KOD VE TEZGAH MODELi SERVER\'DAN KULLANILARAK)',
+								fieldLabel : '1- VERICUT REVIEW DATASI KULLANILARAK GAUGE VE EXCESS ANALIZI YAPILDI MI?(TEZGAH MODELI SERVERDAN MI KULLANILIYOR?)',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -86,7 +87,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlCv13',
 								name : 'cv13',
-								fieldLabel : '3- PARCA MODELi CONFIGIRASYON STATUS\'TEKI SON VERSiYON iLE AYNI MI?',
+								fieldLabel : '2- ETIKET VE PROGRAM ONAY KONTROLU EKLENMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -94,7 +95,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlCv14',
 								name : 'cv14',
-								fieldLabel : '4- PARCA MODELi iLE TEKNiK RESiM KARSILASTIRILARAK UNSUR VE TOLERANS KONTROLU YAPILDI MI?',
+								fieldLabel : '3- TAKIM, HAMMALZEME, PROGRAM SIRASI VE BAGLAMA/TAKLA KONTROLU YAPILMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -102,7 +103,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlCv15',
 								name : 'cv15',
-								fieldLabel : '5- ETiKET, PROGRAM ONAY, TAKIM KONTROL PROGRAMI, HAM MALZEME KONTROL, BAGLAMA/TAKLA KONTROL, HATALI PROGRAM KONTROL, BAGLANTI ELEMANI/SOKULECEK PARCA KONTROL GiBi POKE-YOKE UNSURLARI EKLENDi Mi?',
+								fieldLabel : '4- VARSA SOKULECEK PARCA/CIVATA/PABUC KONTROLU EKLENMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -118,7 +119,8 @@ Ext
 								name : 'nc11',
 								fieldLabel : '1- NC PROGRAMLAR OPERASYON BAZINDA SiSTEME KAYDEDiLDi Mi? \\\\192.168.161.35\\CNC PROGRAMLAR',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -126,13 +128,14 @@ Ext
 								name : 'nc12',
 								fieldLabel : '2- NC PROGRAM ETiKETiNDEKi POST VERSiYONU iLE YURURLUKTEKi SURUM AYNI MI?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
 								id : 'faiCtrlNc13',
 								name : 'nc13',
-								fieldLabel : '3- NC PROGRAMLAR\'DA KULLANILAN TAKIM NUMARALARI iLE VERICUT  VE OTF\'DE YAZAN TAKIM NUMARALARI UYUMLU MU?',
+								fieldLabel : '1- NC PROGRAMLAR\'DA KULLANILAN TAKIM NUMARALARI iLE VERICUT  VE OTF\'DE YAZAN TAKIM NUMARALARI UYUMLU MU?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -140,7 +143,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlNc14',
 								name : 'nc14',
-								fieldLabel : '4- iSLEM SURESi, SURE ONAY FORMU iLE KONTROL EDiLMiS Mi? SURE TEKLiF SURESi iCiNDE Mi?',
+								fieldLabel : '2- iSLEM SURESi, SURE ONAY FORMU iLE KONTROL EDiLMiS Mi? SURE TEKLiF SURESi iCiNDE Mi?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -148,7 +151,8 @@ Ext
 								xtype : 'label',
 								text : 'SETUP KONTROLU',
 								margin : '20 10 10 10',
-								style : 'font-size: 16px; font-weight: bold;'
+								style : 'font-size: 16px; font-weight: bold;',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -156,7 +160,8 @@ Ext
 								name : 'se11',
 								fieldLabel : '1- GRAIN DIRECTION(HADDELEME YONU)TEKNiK RESiM, HAM MALZEME VE PROGRAMLAMADA ESLESiYOR MU?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -164,7 +169,8 @@ Ext
 								name : 'se12',
 								fieldLabel : '2- YENi TAKIMLAR TAKIM LiSTESiNE EKLENDi Mi? / TALEP YAPILDI MI?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'label',
@@ -176,7 +182,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlOb11',
 								name : 'ob11',
-								fieldLabel : '1- OBF HAZIRLIGI EN AZ GEREKSiNiMLER iLE BiRLiKTE YAPILDI MI?',
+								fieldLabel : '1- OBF STANDART TASLAK KULLANILARAK HAZIRLANMIS MI?/iS SIFIRI VERICUT VE CATIA iLE AYNI MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -209,7 +215,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlSe21',
 								name : 'se21',
-								fieldLabel : '1- TEZGAH UZERiNDE TAKIM KONTROLLERi YAPILDI MI?',
+								fieldLabel : '1- TAKIMLAR OTF\'DEKi KOD, FONKSiYONEL VE TAM BOY OLARAK DOGRU MU?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -217,7 +223,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlSe22',
 								name : 'se22',
-								fieldLabel : '2- CAM iS SIFIRI iLE OBF\'DE BELiRTiLEN iS SIFIRI UYUMLU MU, TEZGAH iS SIFIRI DOGRU ALINMIS MI?',
+								fieldLabel : '2- TEZGAH iS SIFIRI OBF\'YE UYGUN ALINMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -227,7 +233,8 @@ Ext
 								name : 'se23',
 								fieldLabel : '3- OBF\'YE GORE PARCA VE FIKSTURLERiN UYGUN BAGLANDIGI TEKRAR KONTROL EDiLDi Mi?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -235,7 +242,8 @@ Ext
 								name : 'se24',
 								fieldLabel : '4- ACISAL KAFA KULLANILIYOR iSE KESiCi TAKIM iLE SPINDLE EKSENi ARASI KACIKLIK KONTROL EDiLMiS Mi?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'label',
@@ -255,7 +263,8 @@ Ext
 								xtype : 'label',
 								text : 'NOTLAR (FAI\'yi isleyen Operator tarafindan doldurulacaktir)',
 								margin : '10 10 10 10',
-								style : 'font-size: 20px; font-weight: bold;'
+								style : 'font-size: 20px; font-weight: bold;',
+								hidden : true
 							},
 							{
 								xtype : 'textarea',
@@ -263,7 +272,8 @@ Ext
 								name : 'no12',
 								margin : '4px',
 								width : 620,
-								height : 200
+								height : 200,
+								hidden : true
 							},
 							{
 								xtype : 'container',
@@ -316,7 +326,8 @@ Ext
 								xtype : 'label',
 								text : 'TAKIMLANDIRMA VE FISKTURLER',
 								margin : '10 10 10 10',
-								style : 'font-size: 16px; font-weight: bold;'
+								style : 'font-size: 16px; font-weight: bold;',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -324,7 +335,8 @@ Ext
 								name : 'ta11',
 								fieldLabel : '1- YENi TAKIMLAR TAKIM LiSTESiNE EKLENDi Mi?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -332,7 +344,8 @@ Ext
 								name : 'ta12',
 								fieldLabel : '2- TEZGAHTA iSLEME ESNASINDA FIKSTUR REViZYONU YAPILDI iSE MODEL FIKSTUR UZMANINA GONDERiLDi Mi?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'label',
@@ -352,7 +365,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlOb22',
 								name : 'ob22',
-								fieldLabel : '2- OTF SERi iMALATA HAZIR SEKiLDE  SiSTEME YUKLENDi Mi?',
+								fieldLabel : '2- FAI PARCASI GORSEL VE OLCU KONTROLLERi NC PROGRAMLAMA TAKIM LiDERi TARAFINDAN YAPILDI MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -360,7 +373,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlOb23',
 								name : 'ob23',
-								fieldLabel : '3- ORS SERi iMALATA HAZIR SEKiLDE  SiSTEME YUKLENDi Mi?',
+								fieldLabel : '3- OBF iLE ORS ARASI UYUMLU OLACAK SEKiLDE HAZIRLANMIS MI/SiSTEME YUKLENMiS Mi?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
