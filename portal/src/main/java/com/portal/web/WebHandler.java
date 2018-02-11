@@ -26,6 +26,7 @@ import com.portal.dao.domain.Document;
 import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.FaiDfaiJob;
 import com.portal.dao.domain.Machine;
+import com.portal.dao.domain.MachineTime;
 import com.portal.dao.domain.MachineTool;
 import com.portal.dao.domain.MachineToolList;
 import com.portal.dao.domain.OtherJob;
@@ -43,6 +44,7 @@ import com.portal.model.DocumentItem;
 import com.portal.model.FaiControlListItem;
 import com.portal.model.FaiDfaiJobItem;
 import com.portal.model.MachineItem;
+import com.portal.model.MachineTimeItem;
 import com.portal.model.MachineToolItem;
 import com.portal.model.MachineToolListItem;
 import com.portal.model.MenuItem;
@@ -423,9 +425,23 @@ public class WebHandler {
 		fdj.setFixtureEnd(sdf.parse(request.getParameter("fixtureEnd")));
 		fdj.setFixtureStart(sdf.parse(request.getParameter("fixtureStart")));
 		fdj.setPartNumber(request.getParameter("partNumber"));
-		id = Integer.valueOf(request.getParameter("responsible"));
+		fdj.setResponsibleId(Integer.valueOf(request
+				.getParameter("responsible")));
+		if (request.getParameter("rawWidth") != null
+				&& !"".equals(request.getParameter("rawWidth"))) {
+			fdj.setRawWidth(Double.valueOf(request.getParameter("rawWidth")));
+		}
+		if (request.getParameter("rawLength") != null
+				&& !"".equals(request.getParameter("rawLength"))) {
+			fdj.setRawLength(Double.valueOf(request.getParameter("rawLength")));
+		}
+		if (request.getParameter("rawHeigth") != null
+				&& !"".equals(request.getParameter("rawHeigth"))) {
+			fdj.setRawHeigth(Double.valueOf(request.getParameter("rawHeigth")));
+		}
+		fdj.setMachineId(Integer.valueOf(request.getParameter("machine")));
 
-		jobServiceDao.createUpdateFaiDfaiJob(id, fdj);
+		jobServiceDao.createUpdateFaiDfaiJob(fdj);
 
 		response.setStatus(HttpServletResponse.SC_OK);
 		try (PrintWriter out = response.getWriter()) {
@@ -466,7 +482,7 @@ public class WebHandler {
 		i.setCv21(request.getParameter("cv21") != null ? true : false);
 		i.setCv22(request.getParameter("cv22") != null ? true : false);
 		i.setFa11(request.getParameter("fa11") != null
-				&& !"".equals(request.getParameter("fa11")) ? Integer
+				&& !"".equals(request.getParameter("fa11")) ? Double
 				.valueOf(request.getParameter("fa11")) : null);
 		i.setFa12(request.getParameter("fa12") != null
 				&& !"".equals(request.getParameter("fa12")) ? Integer
@@ -493,6 +509,27 @@ public class WebHandler {
 		i.setSe24(request.getParameter("se24") != null ? true : false);
 		i.setTa11(request.getParameter("ta11") != null ? true : false);
 		i.setTa12(request.getParameter("ta12") != null ? true : false);
+		i.setFlipNum(request.getParameter("flipNum") != null
+				&& !"".equals(request.getParameter("flipNum")) ? Double
+				.valueOf(request.getParameter("flipNum")) : null);
+		i.setTakilonNum(request.getParameter("takilonNum") != null
+				&& !"".equals(request.getParameter("takilonNum")) ? Double
+				.valueOf(request.getParameter("takilonNum")) : null);
+		i.setToolChange(request.getParameter("toolChange") != null
+				&& !"".equals(request.getParameter("toolChange")) ? Double
+				.valueOf(request.getParameter("toolChange")) : null);
+		i.setStopTime(request.getParameter("stopTime") != null
+				&& !"".equals(request.getParameter("stopTime")) ? Double
+				.valueOf(request.getParameter("stopTime")) : null);
+		i.setSimulTime(request.getParameter("simulTime") != null
+				&& !"".equals(request.getParameter("simulTime")) ? Double
+				.valueOf(request.getParameter("simulTime")) : null);
+		i.setOfferTime(request.getParameter("offerTime") != null
+				&& !"".equals(request.getParameter("offerTime")) ? Double
+				.valueOf(request.getParameter("offerTime")) : null);
+		i.setTotalTime(request.getParameter("totalTime") != null
+				&& !"".equals(request.getParameter("totalTime")) ? Double
+				.valueOf(request.getParameter("totalTime")) : null);
 
 		jobServiceDao.createUpdateFaiControlList(i, faiJobId, setId);
 
@@ -590,10 +627,20 @@ public class WebHandler {
 			fI.setFixturePercentage(f.getFixturePercentage());
 			fI.setFixtureStart(sdf.format(f.getFixtureStart()));
 			fI.setId(f.getId());
-			fI.setNameSurname(f.getResponsible().getName() + " "
-					+ f.getResponsible().getLastName());
-			fI.setResponsibleId(f.getResponsible().getId());
 			fI.setPartNumber(f.getPartNumber());
+			if (f.getResponsible() != null) {
+				fI.setNameSurname(f.getResponsible().getName() + " "
+						+ f.getResponsible().getLastName());
+				fI.setResponsibleId(f.getResponsible().getId());
+			}
+			if (f.getMachine() != null) {
+				fI.setMachineName(f.getMachine().getName());
+				fI.setMachineId(f.getMachine().getId());
+			}
+			fI.setRawHeigth(f.getRawHeigth());
+			fI.setRawLength(f.getRawLength());
+			fI.setRawWidth(f.getRawWidth());
+
 			faiDfaiJobItems.add(fI);
 		}
 		ResultData<FaiDfaiJobItem> resultData = new ResultData<FaiDfaiJobItem>();
@@ -668,6 +715,13 @@ public class WebHandler {
 			i.setSe24(f.getSe24());
 			i.setTa11(f.getTa11());
 			i.setTa12(f.getTa12());
+			i.setFlipNum(f.getFlipNum());
+			i.setTakilonNum(f.getTakilonNum());
+			i.setToolChange(f.getToolChange());
+			i.setStopTime(f.getStopTime());
+			i.setSimulTime(f.getSimulTime());
+			i.setOfferTime(f.getOfferTime());
+			i.setTotalTime(f.getTotalTime());
 
 			faiControlListItems.add(i);
 		}
@@ -779,6 +833,9 @@ public class WebHandler {
 			// }
 			if (f.getDoneDate() != null) {
 				fI.setDoneDate(sdf.format(f.getDoneDate()));
+			}
+			if (f.getMachine() != null) {
+				fI.setMachineName(f.getMachine().getName());
 			}
 			faiDfaiJobItems.add(fI);
 		}
@@ -1521,5 +1578,191 @@ public class WebHandler {
 		}
 		in.close();
 		out.close();
+	}
+
+	@RequestMapping(value = "/getMachineTime", method = RequestMethod.POST)
+	public void getMachineTime(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ParseException {
+		response.setCharacterEncoding("UTF-8");
+
+		Integer machineId = null;
+		if (request.getParameter("machineId") != null
+				&& !request.getParameter("machineId").isEmpty()) {
+			machineId = Integer.valueOf(request.getParameter("machineId"));
+		}
+
+		List<MachineTime> machineTimes = toolServiceDao
+				.getMachineTime(machineId);
+
+		List<MachineTimeItem> machineTimeItems = new ArrayList<MachineTimeItem>();
+		MachineTimeItem i;
+		for (MachineTime m : machineTimes) {
+			i = new MachineTimeItem();
+
+			i.setId(m.getId());
+			if (m.getMachine() != null) {
+				i.setMachineId(m.getMachine().getId());
+			}
+			i.setChange(m.getChange());
+			i.setTakilon(m.getTakilon());
+			i.setOp020b(m.getOp020b());
+			i.setOp020k(m.getOp020k());
+			i.setOp020o(m.getOp020o());
+			i.setOp030b(m.getOp030b());
+			i.setOp030k(m.getOp030k());
+			i.setOp030o(m.getOp030o());
+
+			machineTimeItems.add(i);
+		}
+		ResultData<MachineTimeItem> resultData = new ResultData<MachineTimeItem>();
+		resultData.setData(machineTimeItems);
+		try (PrintWriter out = response.getWriter()) {
+			out.println(new Gson().toJson(resultData));
+		}
+	}
+
+	@RequestMapping(value = "/createUpdateMachineTime", method = RequestMethod.POST)
+	public void createUpdateMachineTime(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		MachineTime i = new MachineTime();
+		Integer machineId = null;
+
+		if (request.getParameter("id") != null
+				&& !"".equals(request.getParameter("id"))) {
+			i.setId(Integer.valueOf(request.getParameter("id")));
+		}
+
+		if (request.getParameter("machineId") != null
+				&& !"".equals(request.getParameter("machineId"))) {
+			machineId = Integer.valueOf(request.getParameter("machineId"));
+		}
+		i.setMachineId(machineId);
+		i.setChange(request.getParameter("change") != null
+				&& !"".equals(request.getParameter("change")) ? Double
+				.valueOf(request.getParameter("change")) : null);
+		i.setTakilon(request.getParameter("takilon") != null
+				&& !"".equals(request.getParameter("takilon")) ? Double
+				.valueOf(request.getParameter("takilon")) : null);
+		i.setOp020b(request.getParameter("op020b") != null
+				&& !"".equals(request.getParameter("op020b")) ? Double
+				.valueOf(request.getParameter("op020b")) : null);
+		i.setOp020k(request.getParameter("op020k") != null
+				&& !"".equals(request.getParameter("op020k")) ? Double
+				.valueOf(request.getParameter("op020k")) : null);
+		i.setOp020o(request.getParameter("op020o") != null
+				&& !"".equals(request.getParameter("op020o")) ? Double
+				.valueOf(request.getParameter("op020o")) : null);
+		i.setOp030b(request.getParameter("op030b") != null
+				&& !"".equals(request.getParameter("op030b")) ? Double
+				.valueOf(request.getParameter("op030b")) : null);
+		i.setOp030k(request.getParameter("op030k") != null
+				&& !"".equals(request.getParameter("op030k")) ? Double
+				.valueOf(request.getParameter("op030k")) : null);
+		i.setOp030o(request.getParameter("op030o") != null
+				&& !"".equals(request.getParameter("op030o")) ? Double
+				.valueOf(request.getParameter("op030o")) : null);
+
+		toolServiceDao.createUpdateMachineTime(i);
+
+		response.setStatus(HttpServletResponse.SC_OK);
+		try (PrintWriter out = response.getWriter()) {
+			out.print(new Gson().toJson(true));
+		}
+	}
+
+	@RequestMapping(value = "/calculateFaiTotalTime", method = RequestMethod.POST)
+	public void calculateFaiTotalTime(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		FaiControlListItem i = new FaiControlListItem();
+
+		i.setFaiJobId(request.getParameter("faiJobId") != null
+				&& !"".equals(request.getParameter("faiJobId")) ? Integer
+				.valueOf(request.getParameter("faiJobId")) : null);
+		i.setListNumber(request.getParameter("listNumber") != null
+				&& !"".equals(request.getParameter("listNumber")) ? Integer
+				.valueOf(request.getParameter("listNumber")) : null);
+		i.setFlipNum(request.getParameter("flipNum") != null
+				&& !"".equals(request.getParameter("flipNum")) ? Double
+				.valueOf(request.getParameter("flipNum")) : 0);
+		i.setTakilonNum(request.getParameter("takilonNum") != null
+				&& !"".equals(request.getParameter("takilonNum")) ? Double
+				.valueOf(request.getParameter("takilonNum")) : 0);
+		i.setToolChange(request.getParameter("toolChange") != null
+				&& !"".equals(request.getParameter("toolChange")) ? Double
+				.valueOf(request.getParameter("toolChange")) : 0);
+		i.setStopTime(request.getParameter("stopTime") != null
+				&& !"".equals(request.getParameter("stopTime")) ? Double
+				.valueOf(request.getParameter("stopTime")) : 0);
+		i.setSimulTime(request.getParameter("simulTime") != null
+				&& !"".equals(request.getParameter("simulTime")) ? Double
+				.valueOf(request.getParameter("simulTime")) : 0);
+		i.setOfferTime(request.getParameter("offerTime") != null
+				&& !"".equals(request.getParameter("offerTime")) ? Double
+				.valueOf(request.getParameter("offerTime")) : 0);
+		i.setTotalTime(request.getParameter("totalTime") != null
+				&& !"".equals(request.getParameter("totalTime")) ? Double
+				.valueOf(request.getParameter("totalTime")) : 0);
+
+		FaiDfaiJob job = jobServiceDao.getFaiDfaiJob(i.getFaiJobId());
+		Double heigth = job.getRawHeigth() * 25.4;
+		Double length = job.getRawLength() * 25.4;
+		Double width = job.getRawWidth() * 25.4;
+
+		Double size = ((heigth * length * width) / 1000000) * 2.7;
+		Double flip = 0.0;
+		MachineTime mTime = null;
+
+		List<MachineTime> machineTimes = toolServiceDao.getMachineTime(job
+				.getMachineId());
+
+		if (machineTimes != null && !machineTimes.isEmpty()) {
+			mTime = machineTimes.get(0);
+		}
+
+		if (mTime != null && mTime.getChange() != null
+				&& mTime.getOp020b() != null && mTime.getOp020o() != null
+				&& mTime.getOp020k() != null && mTime.getOp030k() != null
+				&& mTime.getOp030o() != null && mTime.getOp030b() != null) {
+			if (i.getListNumber() == 1) {
+				if (size <= 30) {
+					flip = mTime.getOp020k();
+				} else if (size > 30 && size <= 250) {
+					flip = mTime.getOp020o();
+				} else {
+					flip = mTime.getOp020b();
+				}
+			} else {
+				if (size <= 30) {
+					flip = mTime.getOp030k();
+				} else if (size > 30 && size <= 250) {
+					flip = mTime.getOp030o();
+				} else {
+					flip = mTime.getOp030b();
+				}
+			}
+			if (flip == 0) {
+				flip = 1.0;
+			}
+		} else {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			try (PrintWriter out = response.getWriter()) {
+				out.print("Please, first fill machine times!");
+			}
+			return;
+		}
+
+		Double d10 = (i.getFlipNum() + 1) * flip;
+		Double d11 = i.getTakilonNum() * mTime.getTakilon();
+		Double d12 = i.getToolChange() * mTime.getChange();
+		Double d13 = i.getStopTime();
+		Double b14 = i.getSimulTime();
+
+		Double totalTime = d10 + d11 + d12 + d13 + b14;
+
+		response.setStatus(HttpServletResponse.SC_OK);
+		try (PrintWriter out = response.getWriter()) {
+			out.print(totalTime);
+		}
 	}
 }

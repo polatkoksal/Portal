@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -119,7 +118,7 @@ public class FaiControlList implements Serializable {
 	private Boolean ob23;
 
 	@Column(name = "fa11")
-	private Integer fa11;
+	private Double fa11;
 
 	@Column(name = "fa12")
 	private Integer fa12;
@@ -129,6 +128,27 @@ public class FaiControlList implements Serializable {
 
 	@Column(name = "fa14", length = 500)
 	private String fa14;
+
+	@Column(name = "flip_num")
+	private Double flipNum;
+
+	@Column(name = "takilon_num")
+	private Double takilonNum;
+
+	@Column(name = "tool_change")
+	private Double toolChange;
+
+	@Column(name = "stop_time")
+	private Double stopTime;
+
+	@Column(name = "simul_time")
+	private Double simulTime;
+
+	@Column(name = "offer_time")
+	private Double offerTime;
+
+	@Column(name = "total_time")
+	private Double totalTime;
 
 	public Integer getId() {
 		return id;
@@ -386,11 +406,11 @@ public class FaiControlList implements Serializable {
 		this.ob23 = ob23;
 	}
 
-	public Integer getFa11() {
+	public Double getFa11() {
 		return fa11;
 	}
 
-	public void setFa11(Integer fa11) {
+	public void setFa11(Double fa11) {
 		this.fa11 = fa11;
 	}
 
@@ -416,6 +436,62 @@ public class FaiControlList implements Serializable {
 
 	public void setFa14(String fa14) {
 		this.fa14 = fa14;
+	}
+
+	public Double getFlipNum() {
+		return flipNum;
+	}
+
+	public void setFlipNum(Double flipNum) {
+		this.flipNum = flipNum;
+	}
+
+	public Double getTakilonNum() {
+		return takilonNum;
+	}
+
+	public void setTakilonNum(Double takilonNum) {
+		this.takilonNum = takilonNum;
+	}
+
+	public Double getToolChange() {
+		return toolChange;
+	}
+
+	public void setToolChange(Double toolChange) {
+		this.toolChange = toolChange;
+	}
+
+	public Double getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(Double stopTime) {
+		this.stopTime = stopTime;
+	}
+
+	public Double getSimulTime() {
+		return simulTime;
+	}
+
+	public void setSimulTime(Double simulTime) {
+		this.simulTime = simulTime;
+	}
+
+	public Double getOfferTime() {
+		return offerTime;
+	}
+
+	public void setOfferTime(Double offerTime) {
+		this.offerTime = offerTime;
+	}
+
+	public Double getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(Double totalTime) {
+		this.totalTime = totalTime;
 	}
 
 }

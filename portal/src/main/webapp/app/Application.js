@@ -7,7 +7,7 @@ Ext.application({
 			'MachineToolListStore', 'ToolStore', 'MachineToolStore',
 			'ComboToolStore', 'MachineStore', 'DocumentStore',
 			'UserSkillStore', 'DoneFaiDfaiJobStore', 'ComboFaiUserStore',
-			'JobRequestStore', 'FaiControlListStore' ],
+			'JobRequestStore', 'FaiControlListStore', 'MachineTimeStore' ],
 	controllers : [],
 	views : [],
 	launch : function() {

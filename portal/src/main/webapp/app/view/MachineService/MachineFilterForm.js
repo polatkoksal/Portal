@@ -4,7 +4,8 @@ Ext
 				{
 					extend : 'Ext.form.Panel',
 					alias : 'widget.machinefilterform',
-					requires : [ 'Portal.view.MachineService.MachineAddForm' ],
+					requires : [ 'Portal.view.MachineService.MachineAddForm',
+							'Portal.view.MachineService.MachineTimeForm' ],
 					items : [
 							{
 								xtype : 'button',
@@ -83,6 +84,59 @@ Ext
 																		});
 															}
 														});
+									} else {
+										Ext.Msg.alert('Warning',
+												'You should select a machine.');
+									}
+								}
+							},
+							{
+								xtype : 'button',
+								id : 'mTimeOpenForm',
+								text : 'Machine Times',
+								margin : '4px',
+								handler : function() {
+									var grid = Ext.ComponentQuery
+											.query('machinegrid')[0];
+									if (grid.getSelectionModel().hasSelection()) {
+										var tabPanel = Ext.ComponentQuery
+												.query('tabpanel')[0];
+										if (!tabPanel
+												.getChildByElement('machineTimeForm')) {
+											tabPanel.add({
+												xtype : 'machinetimeform',
+												id : 'machineTimeForm',
+												title : 'Machine Times',
+												closable : true
+											})
+											var machineId = grid
+													.getSelectionModel()
+													.getSelection()[0]
+													.get('id');
+											var store = Ext.data.StoreManager
+													.get("MachineTimeStore");
+											store.getProxy().setExtraParam(
+													'machineId', machineId);
+											store
+													.load({
+														callback : function() {
+															var record = store
+																	.findRecord(
+																			'machineId',
+																			machineId);
+															if (record != null) {
+																Ext.ComponentQuery
+																		.query('#machineTimeForm')[0]
+																		.loadRecord(record);
+															}
+														}
+													});
+											Ext.ComponentQuery
+													.query('#mTimeHiddenMachineId')[0]
+													.setValue(machineId);
+										}
+										tabPanel
+												.setActiveTab("machineTimeForm");
 									} else {
 										Ext.Msg.alert('Warning',
 												'You should select a machine.');

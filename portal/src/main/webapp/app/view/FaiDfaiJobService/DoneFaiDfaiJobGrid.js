@@ -28,8 +28,8 @@ Ext.define('Portal.view.FaiDfaiJobService.DoneFaiDfaiJobGrid', {
 		dataIndex : 'khCode',
 		width : 80
 	}, {
-		header : 'Machine Code',
-		dataIndex : 'machineCode',
+		header : 'Machine',
+		dataIndex : 'machineName',
 		width : 80
 	}, {
 		header : 'Fixture Start',

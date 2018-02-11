@@ -2,8 +2,6 @@ package com.portal.model;
 
 import java.io.Serializable;
 
-import com.portal.dao.domain.User;
-
 public class FaiControlListItem implements Serializable {
 
 	private static final long serialVersionUID = 900268712702599271L;
@@ -40,10 +38,17 @@ public class FaiControlListItem implements Serializable {
 	private Boolean ob21;
 	private Boolean ob22;
 	private Boolean ob23;
-	private Integer fa11;
+	private Double fa11;
 	private Integer fa12;
 	private String fa13;
 	private String fa14;
+	private Double flipNum;
+	private Double takilonNum;
+	private Double toolChange;
+	private Double stopTime;
+	private Double simulTime;
+	private Double offerTime;
+	private Double totalTime;
 
 	public Integer getId() {
 		return id;
@@ -301,11 +306,11 @@ public class FaiControlListItem implements Serializable {
 		this.ob23 = ob23;
 	}
 
-	public Integer getFa11() {
+	public Double getFa11() {
 		return fa11;
 	}
 
-	public void setFa11(Integer fa11) {
+	public void setFa11(Double fa11) {
 		this.fa11 = fa11;
 	}
 
@@ -331,6 +336,62 @@ public class FaiControlListItem implements Serializable {
 
 	public void setFa14(String fa14) {
 		this.fa14 = fa14;
+	}
+
+	public Double getFlipNum() {
+		return flipNum;
+	}
+
+	public void setFlipNum(Double flipNum) {
+		this.flipNum = flipNum;
+	}
+
+	public Double getTakilonNum() {
+		return takilonNum;
+	}
+
+	public void setTakilonNum(Double takilonNum) {
+		this.takilonNum = takilonNum;
+	}
+
+	public Double getToolChange() {
+		return toolChange;
+	}
+
+	public void setToolChange(Double toolChange) {
+		this.toolChange = toolChange;
+	}
+
+	public Double getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(Double stopTime) {
+		this.stopTime = stopTime;
+	}
+
+	public Double getSimulTime() {
+		return simulTime;
+	}
+
+	public void setSimulTime(Double simulTime) {
+		this.simulTime = simulTime;
+	}
+
+	public Double getOfferTime() {
+		return offerTime;
+	}
+
+	public void setOfferTime(Double offerTime) {
+		this.offerTime = offerTime;
+	}
+
+	public Double getTotalTime() {
+		return totalTime;
+	}
+
+	public void setTotalTime(Double totalTime) {
+		this.totalTime = totalTime;
 	}
 
 }

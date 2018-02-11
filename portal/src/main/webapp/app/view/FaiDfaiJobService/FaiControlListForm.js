@@ -35,7 +35,7 @@ Ext
 										},
 										{
 											xtype : 'textfield',
-											fieldLabel : 'Operasyon Kodu',
+											fieldLabel : 'Operasyon No',
 											id : 'faiCtrlOpCode',
 											name : 'operationCode',
 											margin : '10 10 10 10',
@@ -174,9 +174,168 @@ Ext
 							},
 							{
 								xtype : 'label',
-								text : 'OBF ve OTF',
+								text : 'FAI/DFAI SURE FORMU',
 								margin : '20 10 10 10',
 								style : 'font-size: 16px; font-weight: bold;'
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeFlip',
+								name : 'flipNum',
+								fieldLabel : 'OPERASYON ICINDE TAKLA ADEDI',
+								minValue : 0,
+								defaultValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeTakilon',
+								name : 'takilonNum',
+								fieldLabel : 'OPERASYON ICINDE TAKILON UYGULAMA ADEDI',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeToolChange',
+								name : 'toolChange',
+								fieldLabel : 'OPERASYON ICINDE TAKIM DEGISIM ADEDI',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeStop',
+								name : 'stopTime',
+								fieldLabel : 'HERHANGI BIR DURUS VAR MI? VARSA TAHMINI SURE (DK)',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeSimul',
+								name : 'simulTime',
+								fieldLabel : 'TEZGAH SIMULASYON SURESI (DK)',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeOffer',
+								name : 'offerTime',
+								fieldLabel : 'ISLEM PLANINDA VERILEN TEKLIF SURESI (DK)',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450
+							},
+							{
+								xtype : 'numberfield',
+								id : 'faiCtrlTimeTotal',
+								name : 'totalTime',
+								fieldLabel : 'OPERASYON TOPLAM SURE (DK)',
+								minValue : 0,
+								margin : '10 10 10 10',
+								labelWidth : 350,
+								width : 450,
+								labelStyle : 'font-weight: bold;',
+								readOnly : true
+							},
+							{
+								xtype : 'container',
+								layout : 'vbox',
+								items : [
+										{
+											xtype : 'button',
+											id : 'faiCtrlTimeCalculate',
+											text : 'Hesapla',
+											margin : '10 10 10 10',
+											handler : function() {
+												var ctrlForm = Ext.ComponentQuery
+														.query('faicontrollistform')[0];
+												Ext.Ajax
+														.request({
+															method : 'POST',
+															url : 'calculateFaiTotalTime',
+															params : {
+																'flipNum' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeFlip')
+																		.getValue(),
+																'takilonNum' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeTakilon')
+																		.getValue(),
+																'toolChange' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeToolChange')
+																		.getValue(),
+																'stopTime' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeStop')
+																		.getValue(),
+																'simulTime' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeSimul')
+																		.getValue(),
+																'offerTime' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeOffer')
+																		.getValue(),
+																'faiJobId' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlHiddenFaiJobId')
+																		.getValue(),
+																'listNumber' : ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlHiddenListNumber')
+																		.getValue()
+															},
+															success : function(
+																	response,
+																	opts) {
+																ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeTotal')
+																		.setValue(
+																				response.responseText);
+															},
+															failure : function(
+																	response,
+																	opts) {
+																Ext.Msg
+																		.alert(
+																				'Error',
+																				response.responseText);
+															}
+														});
+											}
+										},
+										{
+											xtype : 'label',
+											text : 'OBF ve OTF',
+											margin : '20 10 10 10',
+											style : 'font-size: 16px; font-weight: bold;'
+										} ]
 							},
 							{
 								xtype : 'checkbox',
@@ -255,7 +414,7 @@ Ext
 								xtype : 'textarea',
 								id : 'faiCtrlNo11',
 								name : 'no11',
-								margin : '4px',
+								margin : '10 10 10 10',
 								width : 620,
 								height : 200
 							},
@@ -270,7 +429,7 @@ Ext
 								xtype : 'textarea',
 								id : 'faiCtrlNo12',
 								name : 'no12',
-								margin : '4px',
+								margin : '10 10 10 10',
 								width : 620,
 								height : 200,
 								hidden : true
@@ -379,40 +538,6 @@ Ext
 							},
 							{
 								xtype : 'label',
-								text : 'FAI SUREC DEGERLENDiRMESi',
-								margin : '10 10 10 10',
-								style : 'font-size: 16px; font-weight: bold;'
-							},
-							{
-								xtype : 'container',
-								layout : 'hbox',
-								items : [ {
-									xtype : 'numberfield',
-									id : 'faiCtrlFa11',
-									name : 'fa11',
-									fieldLabel : 'PARCA TOPLAM TEKLiF SURESi',
-									minValue : 0,
-									margin : '4px',
-									width : 160
-								}, {
-									xtype : 'numberfield',
-									id : 'faiCtrlFa12',
-									name : 'fa12',
-									fieldLabel : 'PARCA FiiLi TOPLAM SURE',
-									minValue : 0,
-									margin : '4px',
-									width : 160
-								}, {
-									xtype : 'textfield',
-									id : 'faiCtrlFa13',
-									name : 'fa13',
-									fieldLabel : 'SUREC DEGERLENDiRME',
-									margin : '4px',
-									width : 280
-								} ]
-							},
-							{
-								xtype : 'label',
 								text : 'FAI KAPANIS YORUMLAR',
 								padding : '40 10 20 10',
 								style : 'font-size: 16px; font-weight: bold;'
@@ -421,7 +546,7 @@ Ext
 								xtype : 'textarea',
 								id : 'faiCtrlFa14',
 								name : 'fa14',
-								margin : '4px',
+								margin : '10 10 10 10',
 								width : 620,
 								height : 100
 							},
@@ -429,7 +554,7 @@ Ext
 								xtype : 'button',
 								id : 'faiCtrlSave',
 								text : 'Save',
-								margin : '4px',
+								margin : '10 10 10 10',
 								handler : function() {
 									var form = Ext.ComponentQuery
 											.query('faicontrollistform')[0];

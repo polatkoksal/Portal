@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -103,12 +102,29 @@ public class FaiDfaiJob implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date doneDate;
 
+	@Column(name = "raw_width")
+	private Double rawWidth;
+
+	@Column(name = "raw_length")
+	private Double rawLength;
+
+	@Column(name = "raw_heigth")
+	private Double rawHeigth;
+
 	@ManyToOne
 	@JoinColumn(name = "responsible")
 	private User responsible;
 
 	@OneToMany(mappedBy = "faiJob")
 	private List<FaiControlList> controlLists;
+
+	@ManyToOne
+	@JoinColumn(name = "machine")
+	private Machine machine;
+
+	private Integer responsibleId;
+
+	private Integer machineId;
 
 	public Integer getId() {
 		return id;
@@ -308,6 +324,54 @@ public class FaiDfaiJob implements Serializable {
 
 	public void setControlLists(List<FaiControlList> controlLists) {
 		this.controlLists = controlLists;
+	}
+
+	public Machine getMachine() {
+		return machine;
+	}
+
+	public void setMachine(Machine machine) {
+		this.machine = machine;
+	}
+
+	public Integer getResponsibleId() {
+		return responsibleId;
+	}
+
+	public void setResponsibleId(Integer responsibleId) {
+		this.responsibleId = responsibleId;
+	}
+
+	public Integer getMachineId() {
+		return machineId;
+	}
+
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
+	}
+
+	public Double getRawWidth() {
+		return rawWidth;
+	}
+
+	public void setRawWidth(Double rawWidth) {
+		this.rawWidth = rawWidth;
+	}
+
+	public Double getRawLength() {
+		return rawLength;
+	}
+
+	public void setRawLength(Double rawLength) {
+		this.rawLength = rawLength;
+	}
+
+	public Double getRawHeigth() {
+		return rawHeigth;
+	}
+
+	public void setRawHeigth(Double rawHeigth) {
+		this.rawHeigth = rawHeigth;
 	}
 
 }

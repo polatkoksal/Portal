@@ -5,7 +5,8 @@ Ext.define('Portal.store.DoneFaiDfaiJobStore', {
 			'fixtureStart', 'fixtureEnd', 'fixturePercentage', 'catiaStart',
 			'catiaEnd', 'catiaPercentage', 'documentStart', 'documentEnd',
 			'documentPercentage', 'benchStart', 'benchEnd', 'benchPercentage',
-			'description', 'nameSurname', 'responsibleId', 'doneDate' ],
+			'description', 'nameSurname', 'responsibleId', 'doneDate',
+			'machineName' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getDoneFaiDfaiJobs',

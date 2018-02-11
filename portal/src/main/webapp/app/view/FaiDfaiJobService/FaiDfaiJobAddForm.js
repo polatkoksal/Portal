@@ -52,10 +52,16 @@ Ext.define('Portal.view.FaiDfaiJobService.FaiDfaiJobAddForm', {
 		margin : '4px',
 		width : 500
 	}, {
-		xtype : 'textfield',
-		fieldLabel : 'Machine Code',
-		id : 'faiDfaiMachineCode',
-		name : 'machineCode',
+		xtype : 'combobox',
+		fieldLabel : 'Machine',
+		id : 'faiDfaiMachine',
+		name : 'machine',
+		store : 'MachineStore',
+		displayField : 'name',
+		valueField : 'id',
+		editable : false,
+		allowBlank : false,
+		emptyText : 'Select Machine',
 		margin : '4px',
 		width : 500
 	}, {
@@ -215,6 +221,42 @@ Ext.define('Portal.view.FaiDfaiJobService.FaiDfaiJobAddForm', {
 		margin : '4px',
 		width : 500,
 		height : 100
+	}, {
+		xtype : 'label',
+		text : 'Raw Material Dimensions:',
+		margin : '4px',
+		style : 'font-size: 12px; font-weight: bold;'
+	}, {
+		xtype : 'container',
+		layout : 'hbox',
+		items : [ {
+			xtype : 'numberfield',
+			fieldLabel : 'Width',
+			id : 'faiDfaiRawWidth',
+			name : 'rawWidth',
+			minValue : 0,
+			margin : '4px',
+			width : 160,
+			labelWidth : 60
+		}, {
+			xtype : 'numberfield',
+			fieldLabel : 'Length',
+			id : 'faiDfaiRawLength',
+			name : 'rawLength',
+			minValue : 0,
+			margin : '4px',
+			width : 162,
+			labelWidth : 62
+		}, {
+			xtype : 'numberfield',
+			fieldLabel : 'Heigth',
+			id : 'faiDfaiRawHeigth',
+			name : 'rawHeigth',
+			minValue : 0,
+			margin : '4px',
+			width : 160,
+			labelWidth : 60
+		} ]
 	}, {
 		xtype : 'button',
 		id : 'faiDfaiAddSave',

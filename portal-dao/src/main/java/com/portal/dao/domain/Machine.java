@@ -1,6 +1,7 @@
 package com.portal.dao.domain;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -20,6 +21,12 @@ public class Machine implements Serializable {
 
 	@Column(name = "type", length = 255)
 	private String type;
+
+	@OneToMany(mappedBy = "machine")
+	private List<FaiDfaiJob> faiDfaiJobs;
+
+	@OneToMany(mappedBy = "machine")
+	private List<MachineTime> machineTimes;
 
 	public Integer getId() {
 		return id;
@@ -43,6 +50,22 @@ public class Machine implements Serializable {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public List<FaiDfaiJob> getFaiDfaiJobs() {
+		return faiDfaiJobs;
+	}
+
+	public void setFaiDfaiJobs(List<FaiDfaiJob> faiDfaiJobs) {
+		this.faiDfaiJobs = faiDfaiJobs;
+	}
+
+	public List<MachineTime> getMachineTimes() {
+		return machineTimes;
+	}
+
+	public void setMachineTimes(List<MachineTime> machineTimes) {
+		this.machineTimes = machineTimes;
 	}
 
 }

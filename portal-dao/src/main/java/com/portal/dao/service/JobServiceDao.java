@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import com.portal.dao.domain.Action;
 import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.FaiDfaiJob;
+import com.portal.dao.domain.Machine;
 import com.portal.dao.domain.OtherJob;
 import com.portal.dao.domain.User;
 
@@ -52,13 +53,15 @@ public class JobServiceDao implements IJobServiceDao {
 	}
 
 	@Override
-	public Boolean createUpdateFaiDfaiJob(Integer responsibleId,
-			FaiDfaiJob faiDfaiJob) {
+	public Boolean createUpdateFaiDfaiJob(FaiDfaiJob faiDfaiJob) {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-		User u = em.find(User.class, responsibleId);
+		User u = em.find(User.class, faiDfaiJob.getResponsibleId());
 		faiDfaiJob.setResponsible(u);
+
+		Machine m = em.find(Machine.class, faiDfaiJob.getMachineId());
+		faiDfaiJob.setMachine(m);
 
 		faiDfaiJob.setJobState("undone");
 
@@ -111,8 +114,9 @@ public class JobServiceDao implements IJobServiceDao {
 		}
 
 		String qString = "select u from FaiDfaiJob u where "
-				+ "(u.jobState = 'undone' or u.jobState is null)" + qParams
-				+ " order by u.id";
+				+ "(u.jobState = 'undone' or u.jobState is null)"
+				+ qParams
+				+ " order by u.fixtureStart, u.catiaStart, u.documentStart, u.benchStart";
 
 		Query query = em.createQuery(qString);
 
@@ -129,6 +133,24 @@ public class JobServiceDao implements IJobServiceDao {
 
 		List<FaiDfaiJob> faiDfaiJobs = query.getResultList();
 		return faiDfaiJobs;
+	}
+
+	@Override
+	public FaiDfaiJob getFaiDfaiJob(Integer faiJobId) {
+		if (faiJobId == null) {
+			return null;
+		}
+
+		em = this.getEntityManager();
+
+		String queryStr = "select u from FaiDfaiJob u where u.id =:id";
+
+		Query query = em.createQuery(queryStr);
+		query.setParameter("id", faiJobId);
+
+		FaiDfaiJob f = (FaiDfaiJob) query.getSingleResult();
+
+		return f;
 	}
 
 	@Override

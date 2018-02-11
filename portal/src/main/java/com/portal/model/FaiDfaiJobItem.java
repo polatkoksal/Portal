@@ -2,6 +2,8 @@ package com.portal.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+
 public class FaiDfaiJobItem implements Serializable {
 
 	private static final long serialVersionUID = -6142422074178131120L;
@@ -30,6 +32,11 @@ public class FaiDfaiJobItem implements Serializable {
 	private String nameSurname;
 	private String doneDate;
 	private Integer responsibleId;
+	private String machineName;
+	private Integer machineId;
+	private Double rawWidth;
+	private Double rawLength;
+	private Double rawHeigth;
 
 	public Integer getId() {
 		return id;
@@ -221,6 +228,46 @@ public class FaiDfaiJobItem implements Serializable {
 
 	public void setPeriod(String period) {
 		this.period = period;
+	}
+
+	public String getMachineName() {
+		return machineName;
+	}
+
+	public void setMachineName(String machineName) {
+		this.machineName = machineName;
+	}
+
+	public Integer getMachineId() {
+		return machineId;
+	}
+
+	public void setMachineId(Integer machineId) {
+		this.machineId = machineId;
+	}
+
+	public Double getRawWidth() {
+		return rawWidth;
+	}
+
+	public void setRawWidth(Double rawWidth) {
+		this.rawWidth = rawWidth;
+	}
+
+	public Double getRawLength() {
+		return rawLength;
+	}
+
+	public void setRawLength(Double rawLength) {
+		this.rawLength = rawLength;
+	}
+
+	public Double getRawHeigth() {
+		return rawHeigth;
+	}
+
+	public void setRawHeigth(Double rawHeigth) {
+		this.rawHeigth = rawHeigth;
 	}
 
 }

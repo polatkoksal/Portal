@@ -5,7 +5,8 @@ Ext.define('Portal.store.FaiDfaiJobStore', {
 			'fixturePercentage', 'catiaStart', 'catiaEnd', 'catiaPercentage',
 			'documentStart', 'documentEnd', 'documentPercentage', 'benchStart',
 			'benchEnd', 'benchPercentage', 'description', 'nameSurname',
-			'responsibleId' ],
+			'responsibleId', 'machineName', 'machineId', 'rawWidth',
+			'rawLength', 'rawHeigth' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getFaiDfaiJobs',

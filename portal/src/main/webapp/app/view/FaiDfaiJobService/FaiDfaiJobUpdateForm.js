@@ -19,6 +19,11 @@ Ext
 								name : 'responsibleId'
 							},
 							{
+								xtype : 'hiddenfield',
+								id : 'machineId',
+								name : 'machineId'
+							},
+							{
 								xtype : 'container',
 								layout : 'hbox',
 								items : [
@@ -62,7 +67,7 @@ Ext
 													},
 													{
 														xtype : 'textfield',
-														fieldLabel : 'Dpr Number',
+														fieldLabel : 'Drp Number',
 														id : 'faiDfaiDrpNumber2',
 														name : 'drpNumber',
 														margin : '4px',
@@ -77,10 +82,16 @@ Ext
 														width : 500
 													},
 													{
-														xtype : 'textfield',
-														fieldLabel : 'Machine Code',
-														id : 'faiDfaiMachineCode2',
-														name : 'machineCode',
+														xtype : 'combobox',
+														fieldLabel : 'Machine',
+														id : 'faiDfaiMachine2',
+														name : 'machine',
+														store : 'MachineStore',
+														displayField : 'name',
+														valueField : 'id',
+														editable : false,
+														allowBlank : false,
+														emptyText : 'Select Machine',
 														margin : '4px',
 														width : 500
 													},
@@ -261,6 +272,47 @@ Ext
 														height : 100
 													},
 													{
+														xtype : 'label',
+														text : 'Raw Material Dimensions (Inch):',
+														margin : '4px',
+														style : 'font-size: 12px; font-weight: bold;'
+													},
+													{
+														xtype : 'container',
+														layout : 'hbox',
+														items : [
+																{
+																	xtype : 'numberfield',
+																	fieldLabel : 'Width',
+																	id : 'faiDfaiRawWidth2',
+																	name : 'rawWidth',
+																	minValue : 0,
+																	margin : '4px',
+																	width : 160,
+																	labelWidth : 60
+																},
+																{
+																	xtype : 'numberfield',
+																	fieldLabel : 'Length',
+																	id : 'faiDfaiRawLength2',
+																	name : 'rawLength',
+																	minValue : 0,
+																	margin : '4px',
+																	width : 162,
+																	labelWidth : 62
+																},
+																{
+																	xtype : 'numberfield',
+																	fieldLabel : 'Heigth',
+																	id : 'faiDfaiRawHeigth2',
+																	name : 'rawHeigth',
+																	minValue : 0,
+																	margin : '4px',
+																	width : 160,
+																	labelWidth : 60
+																} ]
+													},
+													{
 														xtype : 'container',
 														layout : 'hbox',
 														items : [
@@ -352,6 +404,14 @@ Ext
 																						title : 'FAI Control List 1',
 																						closable : true
 																					})
+																			var role = Ext.ComponentQuery
+																					.query('#loginFormHiddenRole')[0]
+																					.getValue();
+																			if (role != 'Admin') {
+																				Ext.ComponentQuery
+																						.query('#faiCtrlSetupApResp')[0]
+																						.setReadOnly(true);
+																			}
 																			var faiJobId = Ext.ComponentQuery
 																					.query('#faiDfaiHiddenId2')[0]
 																					.getValue();
@@ -409,6 +469,14 @@ Ext
 																						title : 'FAI Control List 2',
 																						closable : true
 																					})
+																			var role = Ext.ComponentQuery
+																					.query('#loginFormHiddenRole')[0]
+																					.getValue();
+																			if (role != 'Admin') {
+																				Ext.ComponentQuery
+																						.query('#faiCtrlSetupApResp')[0]
+																						.setReadOnly(true);
+																			}
 																			var faiJobId = Ext.ComponentQuery
 																					.query('#faiDfaiHiddenId2')[0]
 																					.getValue();
@@ -466,6 +534,14 @@ Ext
 																						title : 'FAI Control List 3',
 																						closable : true
 																					})
+																			var role = Ext.ComponentQuery
+																					.query('#loginFormHiddenRole')[0]
+																					.getValue();
+																			if (role != 'Admin') {
+																				Ext.ComponentQuery
+																						.query('#faiCtrlSetupApResp')[0]
+																						.setReadOnly(true);
+																			}
 																			var faiJobId = Ext.ComponentQuery
 																					.query('#faiDfaiHiddenId2')[0]
 																					.getValue();
@@ -523,6 +599,14 @@ Ext
 																						title : 'FAI Control List 4',
 																						closable : true
 																					})
+																			var role = Ext.ComponentQuery
+																					.query('#loginFormHiddenRole')[0]
+																					.getValue();
+																			if (role != 'Admin') {
+																				Ext.ComponentQuery
+																						.query('#faiCtrlSetupApResp')[0]
+																						.setReadOnly(true);
+																			}
 																			var faiJobId = Ext.ComponentQuery
 																					.query('#faiDfaiHiddenId2')[0]
 																					.getValue();

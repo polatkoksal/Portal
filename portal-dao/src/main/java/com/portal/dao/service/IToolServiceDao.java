@@ -3,7 +3,9 @@ package com.portal.dao.service;
 import java.util.List;
 
 import com.portal.dao.domain.Document;
+import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.Machine;
+import com.portal.dao.domain.MachineTime;
 import com.portal.dao.domain.MachineToolList;
 import com.portal.dao.domain.MachineTool;
 import com.portal.dao.domain.Tool;
@@ -44,5 +46,9 @@ public interface IToolServiceDao {
 	public Boolean deleteDocument(Integer id);
 
 	public List<Tool> getComboTools(String asmCode);
+
+	public Boolean createUpdateMachineTime(MachineTime machineTime);
+
+	public List<MachineTime> getMachineTime(Integer machineId);
 
 }

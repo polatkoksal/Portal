@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.portal.dao.domain.Document;
 import com.portal.dao.domain.Machine;
+import com.portal.dao.domain.MachineTime;
 import com.portal.dao.domain.MachineTool;
 import com.portal.dao.domain.MachineToolList;
 import com.portal.dao.domain.Tool;
@@ -477,4 +478,44 @@ public class ToolServiceDao implements IToolServiceDao {
 		et.commit();
 		return true;
 	}
+
+	@Override
+	public Boolean createUpdateMachineTime(MachineTime machineTime) {
+		em = this.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Machine m = em.find(Machine.class, machineTime.getMachineId());
+		machineTime.setMachine(m);
+
+		if (machineTime.getId() == null) {
+			em.persist(machineTime);
+		} else {
+			em.merge(machineTime);
+		}
+		et.commit();
+		return true;
+	}
+
+	@Override
+	public List<MachineTime> getMachineTime(Integer machineId) {
+		em = this.getEntityManager();
+
+		String parms = "";
+		if (machineId != null) {
+			parms = "where u.machine.id =:machineId ";
+		}
+
+		String qString = "select u from MachineTime u " + parms
+				+ "order by u.id";
+
+		Query query = em.createQuery(qString);
+
+		if (machineId != null) {
+			query.setParameter("machineId", machineId);
+		}
+
+		List<MachineTime> machineTimes = query.getResultList();
+		return machineTimes;
+	}
+
 }
