@@ -95,7 +95,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlCv14',
 								name : 'cv14',
-								fieldLabel : '3- TAKIM, HAMMALZEME, PROGRAM SIRASI VE BAGLAMA/TAKLA KONTROLU YAPILMIS MI?',
+								fieldLabel : '3- TAKIM, HAMMALZEME VE BAGLAMA/TAKLA KONTROLU YAPILMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -354,6 +354,14 @@ Ext
 								labelWidth : '600px'
 							},
 							{
+								xtype : 'checkbox',
+								id : 'faiCtrlSe23',
+								name : 'se23',
+								fieldLabel : '3- OBF ve ORS, ERP SiSTEMiNE GiRiLMiS Mi?',
+								margin : '10 10 10 10',
+								labelWidth : '600px'
+							},
+							{
 								xtype : 'container',
 								layout : 'vbox',
 								items : [
@@ -385,15 +393,6 @@ Ext
 								fieldLabel : '2- TEZGAH iS SIFIRI OBF\'YE UYGUN ALINMIS MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
-							},
-							{
-								xtype : 'checkbox',
-								id : 'faiCtrlSe23',
-								name : 'se23',
-								fieldLabel : '3- OBF\'YE GORE PARCA VE FIKSTURLERiN UYGUN BAGLANDIGI TEKRAR KONTROL EDiLDi Mi?',
-								margin : '10 10 10 10',
-								labelWidth : '600px',
-								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -448,7 +447,8 @@ Ext
 											xtype : 'label',
 											text : 'CATIA  ve VERICUT',
 											margin : '10 10 10 10',
-											style : 'font-size: 16px; font-weight: bold;'
+											style : 'font-size: 16px; font-weight: bold;',
+											hidden : true
 										} ]
 							},
 							{
@@ -457,7 +457,8 @@ Ext
 								name : 'cv21',
 								fieldLabel : '1- CATIA CAM DOSYALARI SiSTEME YUKLENDi Mi? \\\\192.168.161.35\\Muhendislik\\PROJELER\\PROJE\\PARCA BiLGiLERi',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -465,13 +466,15 @@ Ext
 								name : 'cv22',
 								fieldLabel : '2- VERICUT DOSYALARI SiSTEME YUKLENDi Mi? \\\\192.168.161.35\\Muhendislik\\PROJELER\\PROJE\\PARCA BiLGiLERi',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'label',
 								text : 'NC PROGRAMLAR',
 								margin : '10 10 10 10',
-								style : 'font-size: 16px; font-weight: bold;'
+								style : 'font-size: 16px; font-weight: bold;',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -479,7 +482,8 @@ Ext
 								name : 'nc21',
 								fieldLabel : '1- NC PROGRAM ETiKETLERi DOLDURULUP SiSTEME YUKLENDi Mi? \\\\192.168.161.35\\KaliteDoc\\CNC PROGRAMLAR',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'label',
@@ -518,13 +522,14 @@ Ext
 								name : 'ob21',
 								fieldLabel : '1- OBF SERi iMALATA HAZIR SEKiLDE  SiSTEME YUKLENDi Mi?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
 								id : 'faiCtrlOb22',
 								name : 'ob22',
-								fieldLabel : '2- FAI PARCASI GORSEL VE OLCU KONTROLLERi NC PROGRAMLAMA TAKIM LiDERi TARAFINDAN YAPILDI MI?',
+								fieldLabel : '1- FAI PARCASI GORSEL VE OLCU KONTROLLERi NC PROGRAMLAMA TAKIM LiDERi TARAFINDAN YAPILDI MI?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},
@@ -532,7 +537,7 @@ Ext
 								xtype : 'checkbox',
 								id : 'faiCtrlOb23',
 								name : 'ob23',
-								fieldLabel : '3- OBF iLE ORS ARASI UYUMLU OLACAK SEKiLDE HAZIRLANMIS MI/SiSTEME YUKLENMiS Mi?',
+								fieldLabel : '2- OBF iLE ORS ARASI UYUMLU OLACAK SEKiLDE HAZIRLANMIS MI/SiSTEME YUKLENMiS Mi?',
 								margin : '10 10 10 10',
 								labelWidth : '600px'
 							},

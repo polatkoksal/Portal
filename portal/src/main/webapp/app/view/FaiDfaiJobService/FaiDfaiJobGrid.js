@@ -170,25 +170,21 @@ Ext
 									Ext.ComponentQuery
 											.query('#faiDfaiRawHeigth2')[0]
 											.setReadOnly(true);
+
+									var userId = Ext.ComponentQuery
+											.query('#loginFormHiddenUserId')[0]
+											.getValue();
+									if (record.get('responsibleId') != userId) {
+										Ext.ComponentQuery
+												.query('#faiDfaiAddSave2')[0]
+												.setVisible(false);
+									}
 								}
 								if (role == 'PM') {
 									Ext.ComponentQuery
 											.query('#faiDfaiAddSave2')[0]
 											.setVisible(false);
-									Ext.ComponentQuery
-											.query('#faiControlListOpen1')[0]
-											.setVisible(false);
-									Ext.ComponentQuery
-											.query('#faiControlListOpen2')[0]
-											.setVisible(false);
-									Ext.ComponentQuery
-											.query('#faiControlListOpen3')[0]
-											.setVisible(false);
-									Ext.ComponentQuery
-											.query('#faiControlListOpen4')[0]
-											.setVisible(false);
 								}
-
 								var responsibleId = parseInt(Ext.ComponentQuery
 										.query('#responsibleId')[0].getValue());
 								if (!isNaN(responsibleId)) {

@@ -73,17 +73,17 @@ public class WebHandler {
 		User user = userServiceDao.validateUser(
 				request.getParameter("userName"),
 				request.getParameter("password"));
-		String role = "";
 		if (user != null) {
 			response.setStatus(HttpServletResponse.SC_OK);
 			HttpSession session = request.getSession();
 			session.setAttribute("sessionUser", user);
-			role = user.getRole();
+			response.addHeader("userRole", user.getRole());
+			response.addHeader("userId", user.getId().toString());
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
 		try (PrintWriter out = response.getWriter()) {
-			out.print(role);
+			out.print(response);
 		}
 	}
 
@@ -1705,6 +1705,15 @@ public class WebHandler {
 				.valueOf(request.getParameter("totalTime")) : 0);
 
 		FaiDfaiJob job = jobServiceDao.getFaiDfaiJob(i.getFaiJobId());
+
+		if (job.getRawHeigth() == null || job.getRawLength() == null
+				|| job.getRawWidth() == null) {
+			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			try (PrintWriter out = response.getWriter()) {
+				out.print("Please, first fill raw material dimensions!");
+			}
+			return;
+		}
 		Double heigth = job.getRawHeigth() * 25.4;
 		Double length = job.getRawLength() * 25.4;
 		Double width = job.getRawWidth() * 25.4;

@@ -1,7 +1,10 @@
 package com.portal.dao.service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -99,10 +102,29 @@ public class JobServiceDao implements IJobServiceDao {
 	public List<FaiDfaiJob> getFaiDfaiJobs(Integer userId, String period,
 			String projectName) {
 		em = this.getEntityManager();
+		List<Integer> ids = new ArrayList<Integer>();
+
+		if (userId != -1) {
+			String cStr = "select c from FaiControlList c where c.setupApResp.id=:userId";
+			Query cQuery = em.createQuery(cStr);
+			cQuery.setParameter("userId", userId);
+			List<FaiControlList> controlList = cQuery.getResultList();
+			for (FaiControlList faiControlList : controlList) {
+				if (!ids.contains(faiControlList.getFaiJob().getId())) {
+					ids.add(faiControlList.getFaiJob().getId());
+				}
+			}
+		}
 
 		String qParams = "";
 		if (userId != -1) {
-			qParams = qParams + " and u.responsible.id =:userId";
+			if (ids.size() == 0) {
+				qParams = qParams + " and u.responsible.id =:userId";
+			} else {
+				qParams = qParams
+						+ " and (u.responsible.id =:userId or u.id in :ids)";
+			}
+
 		}
 
 		if (period != null && !"".equals(period)) {
@@ -122,6 +144,9 @@ public class JobServiceDao implements IJobServiceDao {
 
 		if (userId != -1) {
 			query.setParameter("userId", userId);
+			if (ids.size() > 0) {
+				query.setParameter("ids", ids);
+			}
 		}
 
 		if (period != null && !"".equals(period)) {
@@ -132,6 +157,7 @@ public class JobServiceDao implements IJobServiceDao {
 		}
 
 		List<FaiDfaiJob> faiDfaiJobs = query.getResultList();
+
 		return faiDfaiJobs;
 	}
 

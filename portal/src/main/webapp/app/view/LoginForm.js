@@ -11,6 +11,10 @@ Ext
 								id : 'loginFormHiddenRole',
 							},
 							{
+								xtype : 'hiddenfield',
+								id : 'loginFormHiddenUserId',
+							},
+							{
 								xtype : 'textfield',
 								fieldLabel : 'User Name',
 								labelAlign : 'right',
@@ -57,7 +61,15 @@ Ext
 																	.findField(
 																			'loginFormHiddenRole')
 																	.setValue(
-																			response.responseText);
+																			response
+																					.getResponseHeader('userRole'));
+															loginForm
+																	.getForm()
+																	.findField(
+																			'loginFormHiddenUserId')
+																	.setValue(
+																			response
+																					.getResponseHeader('userId'));
 															var loginForm = Ext.ComponentQuery
 																	.query('loginform')[0];
 															var tabPanel = Ext.ComponentQuery

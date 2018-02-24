@@ -438,6 +438,17 @@ Ext
 																								Ext.ComponentQuery
 																										.query('#faiControlListForm')[0]
 																										.loadRecord(record);
+																								var setId = record
+																										.get('setupApRespId');
+																								var userId = Ext.ComponentQuery
+																										.query('#loginFormHiddenUserId')[0]
+																										.getValue();
+																								if (role == 'PM'
+																										|| (role != 'Admin' && setId != userId)) {
+																									Ext.ComponentQuery
+																											.query('#faiCtrlSave')[0]
+																											.setVisible(false);
+																								}
 																							}
 																						}
 																					});
@@ -503,6 +514,17 @@ Ext
 																								Ext.ComponentQuery
 																										.query('#faiControlListForm')[0]
 																										.loadRecord(record);
+																								var setId = record
+																										.get('setupApRespId');
+																								var userId = Ext.ComponentQuery
+																										.query('#loginFormHiddenUserId')[0]
+																										.getValue();
+																								if (role == 'PM'
+																										|| (role != 'Admin' && setId != userId)) {
+																									Ext.ComponentQuery
+																											.query('#faiCtrlSave')[0]
+																											.setVisible(false);
+																								}
 																							}
 																						}
 																					});
@@ -568,6 +590,17 @@ Ext
 																								Ext.ComponentQuery
 																										.query('#faiControlListForm')[0]
 																										.loadRecord(record);
+																								var setId = record
+																										.get('setupApRespId');
+																								var userId = Ext.ComponentQuery
+																										.query('#loginFormHiddenUserId')[0]
+																										.getValue();
+																								if (role == 'PM'
+																										|| (role != 'Admin' && setId != userId)) {
+																									Ext.ComponentQuery
+																											.query('#faiCtrlSave')[0]
+																											.setVisible(false);
+																								}
 																							}
 																						}
 																					});
@@ -633,6 +666,17 @@ Ext
 																								Ext.ComponentQuery
 																										.query('#faiControlListForm')[0]
 																										.loadRecord(record);
+																								var setId = record
+																										.get('setupApRespId');
+																								var userId = Ext.ComponentQuery
+																										.query('#loginFormHiddenUserId')[0]
+																										.getValue();
+																								if (role == 'PM'
+																										|| (role != 'Admin' && setId != userId)) {
+																									Ext.ComponentQuery
+																											.query('#faiCtrlSave')[0]
+																											.setVisible(false);
+																								}
 																							}
 																						}
 																					});
