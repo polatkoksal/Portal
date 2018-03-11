@@ -82,9 +82,6 @@ public class WebHandler {
 		} else {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		}
-		try (PrintWriter out = response.getWriter()) {
-			out.print(response);
-		}
 	}
 
 	@RequestMapping(value = "/getMenuItems", method = RequestMethod.POST)

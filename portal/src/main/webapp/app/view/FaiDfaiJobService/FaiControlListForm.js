@@ -312,12 +312,29 @@ Ext
 															success : function(
 																	response,
 																	opts) {
-																ctrlForm
+																var totalField = ctrlForm
 																		.getForm()
 																		.findField(
-																				'faiCtrlTimeTotal')
-																		.setValue(
-																				response.responseText);
+																				'faiCtrlTimeTotal');
+																totalField
+																		.setValue(response.responseText);
+																var estimateField = ctrlForm
+																		.getForm()
+																		.findField(
+																				'faiCtrlTimeOffer');
+																if (!isNaN(totalField
+																		.getValue())
+																		&& !isNaN(estimateField
+																				.getValue())
+																		&& totalField
+																				.getValue() > estimateField
+																				.getValue()) {
+																	totalField
+																			.setFieldStyle('background-color: #FF0000');
+																} else {
+																	totalField
+																			.setFieldStyle('background-color: #008000');
+																}
 															},
 															failure : function(
 																	response,

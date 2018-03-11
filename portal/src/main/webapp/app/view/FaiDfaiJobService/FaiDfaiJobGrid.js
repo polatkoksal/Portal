@@ -16,6 +16,10 @@ Ext
 						dataIndex : 'projectName',
 						width : 80
 					}, {
+						header : 'Responsible',
+						dataIndex : 'nameSurname',
+						width : 80
+					}, {
 						header : 'Category',
 						dataIndex : 'category',
 						width : 80
@@ -83,10 +87,6 @@ Ext
 						header : '%',
 						dataIndex : 'benchPercentage',
 						width : 30
-					}, {
-						header : 'Responsible',
-						dataIndex : 'nameSurname',
-						width : 80
 					}, {
 						header : 'Description',
 						dataIndex : 'description',
@@ -161,24 +161,6 @@ Ext
 									Ext.ComponentQuery
 											.query('#faiDfaiMachine2')[0]
 											.setReadOnly(true);
-									Ext.ComponentQuery
-											.query('#faiDfaiRawWidth2')[0]
-											.setReadOnly(true);
-									Ext.ComponentQuery
-											.query('#faiDfaiRawLength2')[0]
-											.setReadOnly(true);
-									Ext.ComponentQuery
-											.query('#faiDfaiRawHeigth2')[0]
-											.setReadOnly(true);
-
-									var userId = Ext.ComponentQuery
-											.query('#loginFormHiddenUserId')[0]
-											.getValue();
-									if (record.get('responsibleId') != userId) {
-										Ext.ComponentQuery
-												.query('#faiDfaiAddSave2')[0]
-												.setVisible(false);
-									}
 								}
 								if (role == 'PM') {
 									Ext.ComponentQuery
