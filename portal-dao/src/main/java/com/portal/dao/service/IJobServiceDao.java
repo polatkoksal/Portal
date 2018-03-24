@@ -6,6 +6,7 @@ import java.util.List;
 import com.portal.dao.domain.Action;
 import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.FaiDfaiJob;
+import com.portal.dao.domain.Feedback;
 import com.portal.dao.domain.OtherJob;
 
 public interface IJobServiceDao {
@@ -46,5 +47,11 @@ public interface IJobServiceDao {
 			Integer faiJobId, Integer setId);
 
 	public FaiDfaiJob getFaiDfaiJob(Integer faiJobId);
+
+	public Boolean createUpdateFeedback(Feedback feedback);
+
+	public List<Feedback> getFeedbacks(Integer userId);
+
+	public Boolean deleteFeedback(Integer id);
 
 }

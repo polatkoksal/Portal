@@ -68,7 +68,7 @@ Ext.define('Portal.view.UserService.AddUserForm', {
 		fieldLabel : 'Role',
 		id : 'addUserRole',
 		name : 'role',
-		store : [ 'User', 'Admin', 'PM', 'Prod' ],
+		store : [ 'User', 'Admin', 'PM', 'Prod', 'ProdFP' ],
 		editable : false,
 		value : 'User',
 		margin : '4px',

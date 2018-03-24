@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import com.portal.dao.domain.Action;
 import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.FaiDfaiJob;
+import com.portal.dao.domain.Feedback;
 import com.portal.dao.domain.Machine;
 import com.portal.dao.domain.OtherJob;
 import com.portal.dao.domain.User;
@@ -399,6 +400,58 @@ public class JobServiceDao implements IJobServiceDao {
 		faiDfaiJob.setDoneDate(doneDate);
 		et.begin();
 		em.merge(faiDfaiJob);
+		et.commit();
+		return true;
+	}
+
+	@Override
+	public Boolean createUpdateFeedback(Feedback feedback) {
+		em = this.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		User u1 = em.find(User.class, feedback.getResponsibleId());
+		feedback.setResponsible(u1);
+
+		User u2 = em.find(User.class, feedback.getFeedbackProviderId());
+		feedback.setFeedbackProvider(u2);
+
+		if (feedback.getId() == null) {
+			em.persist(feedback);
+		} else {
+			em.merge(feedback);
+		}
+		et.commit();
+		return true;
+	}
+
+	@Override
+	public List<Feedback> getFeedbacks(Integer userId) {
+		em = this.getEntityManager();
+
+		StringBuilder sb = new StringBuilder("select u from Feedback u ");
+		if (userId != -1) {
+			sb.append("where u.feedbackProvider.id =:userId ");
+		}
+		sb.append("order by u.id");
+
+		Query query = em.createQuery(sb.toString());
+
+		if (userId != -1) {
+			query.setParameter("userId", userId);
+		}
+
+		List<Feedback> feedbacks = query.getResultList();
+
+		return feedbacks;
+	}
+
+	@Override
+	public Boolean deleteFeedback(Integer id) {
+		em = this.getEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		Feedback feedback = em.find(Feedback.class, id);
+		em.remove(feedback);
 		et.commit();
 		return true;
 	}

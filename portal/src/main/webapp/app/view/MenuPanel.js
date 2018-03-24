@@ -8,7 +8,8 @@ Ext.require([ 'Portal.view.UserService.ManageUsersPanel',
 		'Portal.view.DocumentService.DocumentPanel',
 		'Portal.view.UserService.UserSkillPanel',
 		'Portal.view.FaiDfaiJobService.DoneFaiDfaiJobPanel',
-		'Portal.view.JobRequestService.JobRequestPanel' ]);
+		'Portal.view.JobRequestService.JobRequestPanel',
+		'Portal.view.FeedbackService.FeedbackPanel' ]);
 
 Ext
 		.define(
@@ -337,6 +338,27 @@ Ext
 									documentStore.load();
 								}
 								tabPanel.setActiveTab('documentPanel');
+							} else if (record.data.id == 'feedback') {
+								if (!tabPanel
+										.getChildByElement('feedbackPanel')) {
+									tabPanel.add({
+										xtype : 'feedbackpanel',
+										id : 'feedbackPanel',
+										title : 'Feedback',
+										closable : true
+									});
+									if (role != 'Admin' && role != 'PM') {
+										var selectUserCombo = Ext.ComponentQuery
+												.query('#feedbackSelectUser')[0];
+										selectUserCombo.setVisible(false);
+									}
+									var feedbackStore = Ext.data.StoreManager
+											.get("FeedbackStore");
+									feedbackStore.getProxy().setExtraParam(
+											'userId', 0);
+									feedbackStore.load();
+								}
+								tabPanel.setActiveTab('feedbackPanel');
 							}
 						}
 					}

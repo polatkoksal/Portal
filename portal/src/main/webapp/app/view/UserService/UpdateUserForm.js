@@ -76,7 +76,7 @@ Ext
 								fieldLabel : 'Role',
 								id : 'updateUserRole',
 								name : 'role',
-								store : [ 'Admin', 'User', 'PM', 'Prod' ],
+								store : [ 'Admin', 'User', 'PM', 'Prod', 'ProdFP' ],
 								editable : false,
 								forceSelection : true,
 								margin : '4px',

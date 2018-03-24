@@ -9,22 +9,30 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.portal.dao.domain.Action;
 import com.portal.dao.domain.Document;
 import com.portal.dao.domain.FaiControlList;
 import com.portal.dao.domain.FaiDfaiJob;
+import com.portal.dao.domain.Feedback;
 import com.portal.dao.domain.Machine;
 import com.portal.dao.domain.MachineTime;
 import com.portal.dao.domain.MachineTool;
@@ -43,6 +51,7 @@ import com.portal.model.ComboUserItem;
 import com.portal.model.DocumentItem;
 import com.portal.model.FaiControlListItem;
 import com.portal.model.FaiDfaiJobItem;
+import com.portal.model.FeedbackItem;
 import com.portal.model.MachineItem;
 import com.portal.model.MachineTimeItem;
 import com.portal.model.MachineToolItem;
@@ -95,7 +104,8 @@ public class WebHandler {
 		if (sessionUser.getRole().equals("Admin")
 				|| sessionUser.getRole().equals("User")
 				|| sessionUser.getRole().equals("PM")
-				|| sessionUser.getRole().equals("Prod")) {
+				|| sessionUser.getRole().equals("Prod")
+				|| sessionUser.getRole().equals("ProdFP")) {
 			MenuItem item1 = new MenuItem();
 			item1.setId("personalPage");
 			item1.setText("Personal Page");
@@ -151,11 +161,13 @@ public class WebHandler {
 			item5.setLeaf(true);
 			data.add(item5);
 		}
-		MenuItem item6 = new MenuItem();
-		item6.setId("toolList");
-		item6.setText("Tool List");
-		item6.setLeaf(true);
-		data.add(item6);
+		if (!sessionUser.getRole().equals("ProdFP")) {
+			MenuItem item6 = new MenuItem();
+			item6.setId("toolList");
+			item6.setText("Tool List");
+			item6.setLeaf(true);
+			data.add(item6);
+		}
 		if (sessionUser.getRole().equals("Admin")
 				|| sessionUser.getRole().equals("User")
 				|| sessionUser.getRole().equals("PM")
@@ -174,6 +186,15 @@ public class WebHandler {
 			item8.setText("Document List");
 			item8.setLeaf(true);
 			data.add(item8);
+		}
+		if (sessionUser.getRole().equals("Admin")
+				|| sessionUser.getRole().equals("ProdFP")
+				|| sessionUser.getRole().equals("PM")) {
+			MenuItem item9 = new MenuItem();
+			item9.setId("feedback");
+			item9.setText("Feedback");
+			item9.setLeaf(true);
+			data.add(item9);
 		}
 
 		ResultData<MenuItem> resultData = new ResultData<MenuItem>();
@@ -396,7 +417,6 @@ public class WebHandler {
 		response.setCharacterEncoding("UTF-8");
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		FaiDfaiJob fdj = new FaiDfaiJob();
-		Integer id;
 
 		if (request.getParameter("id") != null
 				&& !"".equals(request.getParameter("id"))) {
@@ -1561,9 +1581,11 @@ public class WebHandler {
 		response.setContentType("image/jpeg");
 
 		String imgName = request.getParameter("imgName");
-		File img = new File("C:\\Portal\\Img\\" + imgName + ".jpg");
-		response.setHeader("Content-Disposition", "inline; filename=" + imgName
-				+ ".jpg");
+		if (!StringUtils.isEmpty(imgName) && !imgName.contains(".")) {
+			imgName += ".jpg";
+		}
+		File img = new File("C:\\Portal\\Img\\" + imgName);
+		response.setHeader("Content-Disposition", "inline; filename=" + imgName);
 		response.setContentLength((int) img.length());
 		FileInputStream in = new FileInputStream(img);
 		OutputStream out = response.getOutputStream();
@@ -1770,5 +1792,142 @@ public class WebHandler {
 		try (PrintWriter out = response.getWriter()) {
 			out.print(totalTime);
 		}
+	}
+
+	@RequestMapping(value = "/createUpdateFeedback", method = RequestMethod.POST)
+	public void createUpdateFeedback(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		response.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		Feedback fd = new Feedback();
+
+		if (request.getParameter("id") != null
+				&& !"".equals(request.getParameter("id"))) {
+			fd.setId(Integer.valueOf(request.getParameter("id")));
+		}
+		fd.setProjectName(request.getParameter("projectName"));
+		fd.setPartNumber(request.getParameter("partNumber"));
+		fd.setKhCode(request.getParameter("khCode"));
+		fd.setPdkNo(request.getParameter("pdkNo"));
+		fd.setFeedbackDate(sdf.parse(request.getParameter("feedbackDate")));
+		fd.setDescription(request.getParameter("description"));
+		fd.setImageName(request.getParameter("imageName"));
+		if (request.getParameter("responsible") != null
+				&& !"".equals(request.getParameter("responsible"))) {
+			fd.setResponsibleId(Integer.valueOf(request
+					.getParameter("responsible")));
+		}
+		if (request.getParameter("feedbackProvider") != null
+				&& !"".equals(request.getParameter("feedbackProvider"))) {
+			fd.setFeedbackProviderId(Integer.valueOf(request
+					.getParameter("feedbackProvider")));
+		}
+
+		jobServiceDao.createUpdateFeedback(fd);
+
+		response.setStatus(HttpServletResponse.SC_OK);
+		try (PrintWriter out = response.getWriter()) {
+			out.print(new Gson().toJson(true));
+		}
+	}
+
+	@RequestMapping(value = "/getFeedbacks", method = RequestMethod.POST)
+	public void getFeedbacks(HttpServletRequest request,
+			HttpServletResponse response) throws IOException, ParseException {
+		response.setCharacterEncoding("UTF-8");
+		Integer userId = Integer.valueOf(request.getParameter("userId"));
+		if (userId == 0) {
+			User sessionUser = (User) request.getSession().getAttribute(
+					"sessionUser");
+			userId = sessionUser.getId();
+		}
+
+		List<Feedback> feedbacks = jobServiceDao.getFeedbacks(userId);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+		List<FeedbackItem> feedbackItems = new ArrayList<FeedbackItem>();
+		for (Feedback f : feedbacks) {
+			FeedbackItem fI = new FeedbackItem();
+			fI.setId(f.getId());
+			fI.setProjectName(f.getProjectName());
+			fI.setPartNumber(f.getPartNumber());
+			fI.setKhCode(f.getKhCode());
+			fI.setPdkNo(f.getPdkNo());
+			fI.setFeedbackDate(sdf.format(f.getFeedbackDate()));
+			fI.setDescription(f.getDescription());
+			fI.setImageName(f.getImageName());
+			if (f.getResponsible() != null) {
+				fI.setResponsibleName(f.getResponsible().getName() + " "
+						+ f.getResponsible().getLastName());
+				fI.setResponsibleId(f.getResponsible().getId());
+			}
+			if (f.getFeedbackProvider() != null) {
+				fI.setFeedbackProviderName(f.getFeedbackProvider().getName()
+						+ " " + f.getFeedbackProvider().getLastName());
+				fI.setFeedbackProviderId(f.getFeedbackProvider().getId());
+			}
+
+			feedbackItems.add(fI);
+		}
+		ResultData<FeedbackItem> resultData = new ResultData<FeedbackItem>();
+		resultData.setData(feedbackItems);
+		try (PrintWriter out = response.getWriter()) {
+			out.println(new Gson().toJson(resultData));
+		}
+	}
+
+	@RequestMapping(value = "/deleteFeedback", method = RequestMethod.POST)
+	public void deleteFeedback(HttpServletRequest request,
+			HttpServletResponse response) {
+		response.setCharacterEncoding("UTF-8");
+		if (!"".equals(request.getParameter("id"))
+				&& request.getParameter("id") != null) {
+			jobServiceDao.deleteFeedback(Integer.valueOf(request
+					.getParameter("id")));
+		}
+	}
+
+	@RequestMapping(value = "/feedBackUploadImage", method = RequestMethod.POST)
+	public void feedBackUploadImage(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		// set content type
+		response.setContentType("text/html");
+
+		DiskFileItemFactory fileItemFactory = new DiskFileItemFactory();
+
+		String fileName = "";
+
+		// Set the temporary directory to store the uploaded files of size above
+		// threshold.
+		fileItemFactory.setRepository(new File("C:\\Portal\\Img"));
+
+		ServletFileUpload uploadHandler = new ServletFileUpload(fileItemFactory);
+
+		// Parse the request
+		List items = uploadHandler.parseRequest(request);
+		Iterator iterator = items.iterator();
+		while (iterator.hasNext()) {
+			FileItem item = (FileItem) iterator.next();
+
+			// Handle Form Fields
+			if (item.isFormField()) {
+			} else {
+				fileName = item.getName();
+
+				// Write file to the ultimate location.
+				File file = new File("C:\\Portal\\Img", item.getName());
+				item.write(file);
+			}
+
+		}
+
+		JsonObject js = new JsonObject();
+		js.addProperty("success", true);
+		js.addProperty("fileName", fileName);
+
+		PrintWriter out = response.getWriter();
+		out.print(js);
+
 	}
 }

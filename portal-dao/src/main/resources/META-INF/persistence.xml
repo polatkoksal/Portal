@@ -17,6 +17,7 @@
 		<class>com.portal.dao.domain.UserSkill</class>
 		<class>com.portal.dao.domain.FaiControlList</class>
 		<class>com.portal.dao.domain.MachineTime</class>
+		<class>com.portal.dao.domain.Feedback</class>
 
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

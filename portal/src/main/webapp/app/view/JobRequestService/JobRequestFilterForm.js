@@ -6,7 +6,7 @@ Ext
 					alias : 'widget.jobrequestfilterform',
 					requires : [
 							'Portal.view.JobRequestService.JobRequestAddForm',
-							'Portal.view.JobRequestService.AddJobRequestToFaiDfaiForm' ],
+							'Portal.view.FaiDfaiJobService.FaiDfaiJobUpdateForm' ],
 					items : [
 							{
 								xtype : 'combobox',
@@ -122,11 +122,11 @@ Ext
 										var tabPanel = Ext.ComponentQuery
 												.query('tabpanel')[0];
 										if (!tabPanel
-												.getChildByElement('addJobRequestToFaiDfaiForm')) {
+												.getChildByElement('faiDfaiJobUpdateForm')) {
 											tabPanel
 													.add({
-														xtype : 'addjobrequesttofaidfaiform',
-														id : 'addJobRequestToFaiDfaiForm',
+														xtype : 'faidfaijobupdateform',
+														id : 'faiDfaiJobUpdateForm',
 														title : 'Add Request to Fai/DFai',
 														closable : true
 													})
@@ -137,11 +137,11 @@ Ext
 													.getSelection()[0]
 													.get('id'))
 											Ext.ComponentQuery
-													.query('#addJobRequestToFaiDfaiForm')[0]
+													.query('#faiDfaiJobUpdateForm')[0]
 													.loadRecord(record);
 										}
 										tabPanel
-												.setActiveTab("addJobRequestToFaiDfaiForm");
+												.setActiveTab("faiDfaiJobUpdateForm");
 									} else {
 										Ext.Msg
 												.alert('Warning',

@@ -62,6 +62,12 @@ public class User implements Serializable {
 	@OneToMany(mappedBy = "user")
 	private List<UserSkill> userSkills;
 
+	@OneToMany(mappedBy = "feedbackProvider")
+	private List<Feedback> providerFeedbacks;
+
+	@OneToMany(mappedBy = "responsible")
+	private List<Feedback> responsibleFeedbacks;
+
 	public Integer getId() {
 		return id;
 	}
@@ -172,6 +178,22 @@ public class User implements Serializable {
 
 	public void setSetupFaiControlList(List<FaiControlList> setupFaiControlList) {
 		this.setupFaiControlList = setupFaiControlList;
+	}
+
+	public List<Feedback> getProviderFeedbacks() {
+		return providerFeedbacks;
+	}
+
+	public void setProviderFeedbacks(List<Feedback> providerFeedbacks) {
+		this.providerFeedbacks = providerFeedbacks;
+	}
+
+	public List<Feedback> getResponsibleFeedbacks() {
+		return responsibleFeedbacks;
+	}
+
+	public void setResponsibleFeedbacks(List<Feedback> responsibleFeedbacks) {
+		this.responsibleFeedbacks = responsibleFeedbacks;
 	}
 
 }
