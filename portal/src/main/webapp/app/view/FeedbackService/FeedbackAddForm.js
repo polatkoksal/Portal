@@ -98,6 +98,16 @@ Ext
 								width : 500
 							},
 							{
+								xtype : 'combobox',
+								fieldLabel : 'Status',
+								id : 'feedbackStatus',
+								name : 'feedbackStatus',
+								store : [ 'Yeni', 'Tamamlandi' ],
+								editable : false,
+								margin : '4px',
+								width : 500
+							},
+							{
 								xtype : 'button',
 								id : 'feedbackAddSave',
 								text : 'Save',

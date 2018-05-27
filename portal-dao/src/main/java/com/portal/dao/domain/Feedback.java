@@ -47,6 +47,9 @@ public class Feedback implements Serializable {
 	@Column(name = "image_name", length = 500)
 	private String imageName;
 
+	@Column(name = "feedback_status", length = 500)
+	private String feedbackStatus;
+
 	@ManyToOne
 	@JoinColumn(name = "feedback_provider")
 	private User feedbackProvider;
@@ -152,6 +155,14 @@ public class Feedback implements Serializable {
 
 	public void setResponsibleId(Integer responsibleId) {
 		this.responsibleId = responsibleId;
+	}
+
+	public String getFeedbackStatus() {
+		return feedbackStatus;
+	}
+
+	public void setFeedbackStatus(String feedbackStatus) {
+		this.feedbackStatus = feedbackStatus;
 	}
 
 }

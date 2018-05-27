@@ -58,6 +58,7 @@ Ext
 								id : 'feedbackDeleteJob',
 								text : 'Delete Feedback',
 								margin : '4px',
+								hidden : true,
 								handler : function() {
 									var grid = Ext.ComponentQuery
 											.query('feedbackgrid')[0];

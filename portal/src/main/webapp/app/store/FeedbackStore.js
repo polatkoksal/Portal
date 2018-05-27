@@ -3,7 +3,7 @@ Ext.define('Portal.store.FeedbackStore', {
 	fields : [ 'id', 'projectName', 'partNumber', 'khCode', 'pdkNo',
 			'feedbackDate', 'description', 'feedbackProviderName',
 			'feedbackProviderId', 'responsibleName', 'responsibleId',
-			'imageName' ],
+			'imageName', 'feedbackStatus' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getFeedbacks',

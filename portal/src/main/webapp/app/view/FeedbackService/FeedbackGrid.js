@@ -36,6 +36,10 @@ Ext.define('Portal.view.FeedbackService.FeedbackGrid', {
 		header : 'Feedback Provider',
 		dataIndex : 'feedbackProviderName',
 		width : 150
+	}, {
+		header : 'Status',
+		dataIndex : 'feedbackStatus',
+		width : 150
 	} ],
 	listeners : {
 		itemdblclick : function(thi, record, item, index, e, eOpts) {

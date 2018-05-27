@@ -1812,6 +1812,7 @@ public class WebHandler {
 		fd.setFeedbackDate(sdf.parse(request.getParameter("feedbackDate")));
 		fd.setDescription(request.getParameter("description"));
 		fd.setImageName(request.getParameter("imageName"));
+		fd.setFeedbackStatus(request.getParameter("feedbackStatus"));
 		if (request.getParameter("responsible") != null
 				&& !"".equals(request.getParameter("responsible"))) {
 			fd.setResponsibleId(Integer.valueOf(request
@@ -1857,6 +1858,7 @@ public class WebHandler {
 			fI.setFeedbackDate(sdf.format(f.getFeedbackDate()));
 			fI.setDescription(f.getDescription());
 			fI.setImageName(f.getImageName());
+			fI.setFeedbackStatus(f.getFeedbackStatus());
 			if (f.getResponsible() != null) {
 				fI.setResponsibleName(f.getResponsible().getName() + " "
 						+ f.getResponsible().getLastName());

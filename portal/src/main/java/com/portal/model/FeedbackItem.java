@@ -14,6 +14,7 @@ public class FeedbackItem implements Serializable {
 	private String feedbackDate;
 	private String description;
 	private String imageName;
+	private String feedbackStatus;
 	private String responsibleName;
 	private String feedbackProviderName;
 	private Integer feedbackProviderId;
@@ -113,6 +114,14 @@ public class FeedbackItem implements Serializable {
 
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
+	}
+
+	public String getFeedbackStatus() {
+		return feedbackStatus;
+	}
+
+	public void setFeedbackStatus(String feedbackStatus) {
+		this.feedbackStatus = feedbackStatus;
 	}
 
 }
