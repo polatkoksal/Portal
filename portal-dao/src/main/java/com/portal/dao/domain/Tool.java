@@ -62,10 +62,10 @@ public class Tool implements Serializable {
 	private String insertDefinition;
 
 	@Column(name = "function_length")
-	private Integer functionLength;
+	private Double functionLength;
 
 	@Column(name = "offset_length")
-	private Integer offsetLength;
+	private Double offsetLength;
 
 	@Column(name = "description", length = 500)
 	private String description;
@@ -188,19 +188,19 @@ public class Tool implements Serializable {
 		this.insertDefinition = insertDefinition;
 	}
 
-	public Integer getFunctionLength() {
+	public Double getFunctionLength() {
 		return functionLength;
 	}
 
-	public void setFunctionLength(Integer functionLength) {
+	public void setFunctionLength(Double functionLength) {
 		this.functionLength = functionLength;
 	}
 
-	public Integer getOffsetLength() {
+	public Double getOffsetLength() {
 		return offsetLength;
 	}
 
-	public void setOffsetLength(Integer offsetLength) {
+	public void setOffsetLength(Double offsetLength) {
 		this.offsetLength = offsetLength;
 	}
 

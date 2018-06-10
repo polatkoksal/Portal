@@ -1056,7 +1056,7 @@ public class WebHandler {
 		t.setDescription(request.getParameter("description"));
 		if (request.getParameter("functionLength") != null
 				&& !"".equals(request.getParameter("functionLength"))) {
-			t.setFunctionLength(Integer.valueOf(request
+			t.setFunctionLength(Double.valueOf(request
 					.getParameter("functionLength")));
 		}
 		t.setHolderCode(request.getParameter("holderCode"));
@@ -1069,7 +1069,7 @@ public class WebHandler {
 		t.setInsertDefinition(request.getParameter("insertDefinition"));
 		if (request.getParameter("offsetLength") != null
 				&& !"".equals(request.getParameter("offsetLength"))) {
-			t.setOffsetLength(Integer.valueOf(request
+			t.setOffsetLength(Double.valueOf(request
 					.getParameter("offsetLength")));
 		}
 		t.setToolOp(request.getParameter("toolOp"));

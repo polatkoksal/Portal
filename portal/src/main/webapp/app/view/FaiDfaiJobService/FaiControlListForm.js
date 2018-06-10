@@ -381,6 +381,7 @@ Ext
 							{
 								xtype : 'container',
 								layout : 'vbox',
+								hidden : true,
 								items : [
 										{
 											xtype : 'label',
@@ -401,7 +402,8 @@ Ext
 								name : 'se21',
 								fieldLabel : '1- TAKIMLAR OTF\'DEKi KOD, FONKSiYONEL VE TAM BOY OLARAK DOGRU MU?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -409,7 +411,8 @@ Ext
 								name : 'se22',
 								fieldLabel : '2- TEZGAH iS SIFIRI OBF\'YE UYGUN ALINMIS MI?',
 								margin : '10 10 10 10',
-								labelWidth : '600px'
+								labelWidth : '600px',
+								hidden : true
 							},
 							{
 								xtype : 'checkbox',
@@ -424,7 +427,8 @@ Ext
 								xtype : 'label',
 								text : 'BULGULAR (Setup onayi esnasindaki bulgular yazilacaktir)',
 								margin : '10 10 10 10',
-								style : 'font-size: 20px; font-weight: bold;'
+								style : 'font-size: 20px; font-weight: bold;',
+								hidden : true
 							},
 							{
 								xtype : 'textarea',
@@ -432,7 +436,8 @@ Ext
 								name : 'no11',
 								margin : '10 10 10 10',
 								width : 620,
-								height : 200
+								height : 200,
+								hidden : true
 							},
 							{
 								xtype : 'label',

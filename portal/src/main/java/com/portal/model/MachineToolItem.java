@@ -24,8 +24,8 @@ public class MachineToolItem implements Serializable {
 	private String cutterDefinition;
 	private String insertCode;
 	private String insertDefinition;
-	private Integer functionLength;
-	private Integer offsetLength;
+	private Double functionLength;
+	private Double offsetLength;
 	private String description;
 
 	public Integer getId() {
@@ -164,19 +164,19 @@ public class MachineToolItem implements Serializable {
 		this.insertDefinition = insertDefinition;
 	}
 
-	public Integer getFunctionLength() {
+	public Double getFunctionLength() {
 		return functionLength;
 	}
 
-	public void setFunctionLength(Integer functionLength) {
+	public void setFunctionLength(Double functionLength) {
 		this.functionLength = functionLength;
 	}
 
-	public Integer getOffsetLength() {
+	public Double getOffsetLength() {
 		return offsetLength;
 	}
 
-	public void setOffsetLength(Integer offsetLength) {
+	public void setOffsetLength(Double offsetLength) {
 		this.offsetLength = offsetLength;
 	}
 
