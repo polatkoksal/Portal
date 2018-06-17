@@ -13,6 +13,11 @@ Ext
 								name : 'id'
 							},
 							{
+								xtype : 'hiddenfield',
+								id : 'feedbackImageName2',
+								name : 'imageName'
+							},
+							{
 								xtype : 'container',
 								layout : 'hbox',
 								items : [
@@ -105,49 +110,132 @@ Ext
 														fieldLabel : 'Status',
 														id : 'feedbackStatus2',
 														name : 'feedbackStatus',
-														store : [ 'Yeni', 'Tamamlandi' ],
+														store : [ 'Yeni',
+																'Tamamlandi' ],
 														editable : false,
 														margin : '4px',
 														width : 500
 													},
 													{
-														xtype : 'button',
-														id : 'feedbackAddSave2',
-														text : 'Save',
-														margin : '4px',
-														handler : function() {
-															var form = Ext.ComponentQuery
-																	.query('feedbackupdateform')[0];
-															var formTab = Ext.ComponentQuery
-																	.query('#feedbackUpdateForm')[0];
-															var feedbackStore = Ext.data.StoreManager
-																	.get("FeedbackStore");
-															if (form.isValid()) {
-																form
-																		.submit({
-																			success : function(
-																					form,
-																					action) {
-																				Ext.Msg
-																						.alert(
-																								'Info',
-																								'Feedback is updated');
-																				formTab
-																						.close();
-																				feedbackStore
-																						.load();
-																			},
-																			failure : function(
-																					form,
-																					action) {
-																				Ext.Msg
-																						.alert(
-																								'Error',
-																								'Feedback update failed.');
-																			}
-																		});
-															}
-														}
+														xtype : 'container',
+														layout : 'hbox',
+														items : [
+																{
+																	xtype : 'button',
+																	id : 'feedbackUploadImage2',
+																	text : 'Upload Image',
+																	margin : '4px',
+																	handler : function() {
+																		win = new Ext.Window(
+																				{
+																					title : 'Upload Image',
+																					width : 521,
+																					height : 105,
+																					modal : true,
+																					items : [ {
+																						xtype : 'form',
+																						id : 'feedbackImageUpload2',
+																						name : 'imageUpload',
+																						width : 500,
+																						frame : true,
+																						margin : '4px',
+																						items : [ {
+																							xtype : 'filefield',
+																							name : 'image',
+																							fieldLabel : 'Image',
+																							labelWidth : 50,
+																							msgTarget : 'side',
+																							anchor : '100%',
+																							buttonText : 'Browse...'
+																						} ],
+																						buttons : [ {
+																							text : 'Upload',
+																							handler : function() {
+																								var form = this
+																										.up(
+																												'form')
+																										.getForm();
+																								if (form
+																										.isValid()) {
+																									form
+																											.submit({
+																												url : 'feedBackUploadImage',
+																												method : 'POST',
+																												waitMsg : 'Uploading your image...',
+																												success : function(
+																														form,
+																														action) {
+																													var imageName = Ext.ComponentQuery
+																															.query('#feedbackImageName2')[0];
+																													imageName
+																															.setValue(action.result.fileName);
+																													win
+																															.close();
+																													Ext.Msg
+																															.alert(
+																																	'Info',
+																																	'Image '
+																																			+ action.result.fileName
+																																			+ ' is uploaded.');
+																												},
+																												failure : function(
+																														form,
+																														action) {
+																													Ext.Msg
+																															.alert(
+																																	'Error',
+																																	'Image upload failed.');
+																												}
+																											});
+																								}
+																							}
+																						} ]
+																					} ]
+																				});
+																		win
+																				.show();
+																	}
+																},
+																{
+																	xtype : 'button',
+																	id : 'feedbackAddSave2',
+																	text : 'Save',
+																	margin : '4px',
+																	handler : function() {
+																		var form = Ext.ComponentQuery
+																				.query('feedbackupdateform')[0];
+																		var formTab = Ext.ComponentQuery
+																				.query('#feedbackUpdateForm')[0];
+																		var feedbackStore = Ext.data.StoreManager
+																				.get("FeedbackStore");
+																		if (form
+																				.isValid()) {
+																			form
+																					.submit({
+																						success : function(
+																								form,
+																								action) {
+																							Ext.Msg
+																									.alert(
+																											'Info',
+																											'Feedback is updated');
+																							formTab
+																									.close();
+																							feedbackStore
+																									.load();
+																						},
+																						failure : function(
+																								form,
+																								action) {
+																							Ext.Msg
+																									.alert(
+																											'Error',
+																											'Feedback update failed.');
+																						}
+																					});
+																		}
+																	}
+																} ]
 													} ]
 										}, {
 											xtype : 'image',
