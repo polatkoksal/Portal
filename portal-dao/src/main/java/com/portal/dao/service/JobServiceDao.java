@@ -430,7 +430,7 @@ public class JobServiceDao implements IJobServiceDao {
 
 		StringBuilder sb = new StringBuilder("select u from Feedback u ");
 		if (userId != -1) {
-			sb.append("where u.feedbackProvider.id =:userId ");
+			sb.append("where u.feedbackProvider.id =:userId or u.responsible.id =:userId ");
 		}
 		sb.append("order by u.id");
 
