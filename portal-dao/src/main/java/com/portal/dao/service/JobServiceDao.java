@@ -40,6 +40,10 @@ public class JobServiceDao implements IJobServiceDao {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
+		
+		Machine m = em.find(Machine.class, faiDfaiJob.getMachineId());
+		faiDfaiJob.setMachine(m);
+		
 		faiDfaiJob.setJobState("request");
 		if (faiDfaiJob.getId() == null) {
 			User u = em.find(User.class, responsibleId);

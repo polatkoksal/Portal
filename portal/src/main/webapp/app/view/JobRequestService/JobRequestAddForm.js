@@ -52,10 +52,16 @@ Ext.define('Portal.view.JobRequestService.JobRequestAddForm', {
 		margin : '4px',
 		width : 500
 	}, {
-		xtype : 'textfield',
-		fieldLabel : 'Machine Code',
+		xtype : 'combobox',
+		fieldLabel : 'Machine',
 		id : 'jobRequestMachineCode',
 		name : 'machineCode',
+		store : 'MachineStore',
+		displayField : 'name',
+		valueField : 'id',
+		editable : false,
+		allowBlank : false,
+		emptyText : 'Select Machine',
 		margin : '4px',
 		width : 500
 	}, {

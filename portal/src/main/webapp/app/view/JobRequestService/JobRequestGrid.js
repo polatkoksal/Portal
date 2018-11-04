@@ -29,8 +29,8 @@ Ext.define('Portal.view.JobRequestService.JobRequestGrid', {
 		dataIndex : 'khCode',
 		width : 120
 	}, {
-		header : 'Machine Code',
-		dataIndex : 'machineCode',
+		header : 'Machine',
+		dataIndex : 'machineName',
 		width : 120
 	}, {
 		header : 'Responsible',
@@ -53,6 +53,20 @@ Ext.define('Portal.view.JobRequestService.JobRequestGrid', {
 				})
 				Ext.ComponentQuery.query('#jobRequestUpdateForm')[0]
 						.loadRecord(record);
+				
+				var machineId = parseInt(Ext.ComponentQuery
+						.query('#jobRequestMachineId2')[0].getValue());
+				if (!isNaN(machineId)) {
+					var machineStore = Ext.data.StoreManager
+							.get("MachineStore");
+					var machine = Ext.ComponentQuery
+							.query('#jobRequestMachineCode2')[0];
+					machineStore.load({
+						callback : function() {
+							machine.setValue(machineId);
+						}
+					});
+				}
 			}
 			tabPanel.setActiveTab("jobRequestUpdateForm");
 		}

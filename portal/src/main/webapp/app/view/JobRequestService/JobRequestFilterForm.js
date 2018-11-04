@@ -139,6 +139,19 @@ Ext
 											Ext.ComponentQuery
 													.query('#faiDfaiJobUpdateForm')[0]
 													.loadRecord(record);
+											
+											var machineId = record.get('machineId');
+											if (!isNaN(machineId)) {
+												var machineStore = Ext.data.StoreManager
+														.get("MachineStore");
+												var machine = Ext.ComponentQuery
+														.query('#faiDfaiMachine2')[0];
+												machineStore.load({
+													callback : function() {
+														machine.setValue(machineId);
+													}
+												});
+											}
 										}
 										tabPanel
 												.setActiveTab("faiDfaiJobUpdateForm");

@@ -570,7 +570,7 @@ public class WebHandler {
 			fdj.setId(Integer.valueOf(request.getParameter("id")));
 		}
 		fdj.setKhCode(request.getParameter("khCode"));
-		fdj.setMachineCode(request.getParameter("machineCode"));
+		fdj.setMachineId(Integer.valueOf(request.getParameter("machineCode")));
 		fdj.setProjectName(request.getParameter("projectName"));
 		fdj.setCategory(request.getParameter("category"));
 		fdj.setPeriod(request.getParameter("period"));
@@ -780,6 +780,10 @@ public class WebHandler {
 					+ f.getResponsible().getLastName());
 			fI.setResponsibleId(f.getResponsible().getId());
 			fI.setPartNumber(f.getPartNumber());
+			if (f.getMachine() != null) {
+				fI.setMachineName(f.getMachine().getName());
+				fI.setMachineId(f.getMachine().getId());
+			}
 			faiDfaiJobItems.add(fI);
 		}
 		ResultData<FaiDfaiJobItem> resultData = new ResultData<FaiDfaiJobItem>();

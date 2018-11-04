@@ -8,6 +8,10 @@ Ext.define('Portal.view.JobRequestService.JobRequestUpdateForm', {
 		id : 'jobRequestHiddenId2',
 		name : 'id'
 	}, {
+		xtype : 'hiddenfield',
+		id : 'jobRequestMachineId2',
+		name : 'machineId'
+	}, {
 		xtype : 'numberfield',
 		fieldLabel : 'Period',
 		id : 'jobRequestPeriod2',
@@ -52,10 +56,16 @@ Ext.define('Portal.view.JobRequestService.JobRequestUpdateForm', {
 		margin : '4px',
 		width : 500
 	}, {
-		xtype : 'textfield',
-		fieldLabel : 'Machine Code',
+		xtype : 'combobox',
+		fieldLabel : 'Machine',
 		id : 'jobRequestMachineCode2',
 		name : 'machineCode',
+		store : 'MachineStore',
+		displayField : 'name',
+		valueField : 'id',
+		editable : false,
+		allowBlank : false,
+		emptyText : 'Select Machine',
 		margin : '4px',
 		width : 500
 	}, {

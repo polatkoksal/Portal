@@ -2,7 +2,7 @@ Ext.define('Portal.store.JobRequestStore', {
 	extend : 'Ext.data.Store',
 	fields : [ 'id', 'partNumber', 'drpNumber', 'projectName', 'category',
 			'period', 'khCode', 'machineCode', 'description', 'nameSurname',
-			'responsibleId' ],
+			'responsibleId', 'machineId', 'machineName' ],
 	proxy : {
 		type : 'ajax',
 		url : 'getJobRequests',
