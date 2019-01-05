@@ -162,12 +162,14 @@ Ext
 										title : 'Job Request',
 										closable : true
 									});
-									if (role != 'Admin') {
+									if (role != 'Admin' && role != 'PM') {
 										var selectUserCombo = Ext.ComponentQuery
 												.query('#jobRequestSelectUser')[0];
+										selectUserCombo.setVisible(false);
+									}
+									if (role != 'Admin') {
 										var addToFaiDfai = Ext.ComponentQuery
 												.query('#jobRequestAddFaiDfaiJob')[0];
-										selectUserCombo.setVisible(false);
 										addToFaiDfai.setVisible(false);
 									}
 									var jobRequestStore = Ext.data.StoreManager
