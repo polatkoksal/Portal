@@ -59,17 +59,19 @@ public class JobServiceDao implements IJobServiceDao {
 	}
 
 	@Override
-	public Boolean createUpdateFaiDfaiJob(FaiDfaiJob faiDfaiJob) {
+	public Boolean createUpdateFaiDfaiJob(FaiDfaiJob faiDfaiJob, String jobState) {
 		em = this.getEntityManager();
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		User u = em.find(User.class, faiDfaiJob.getResponsibleId());
 		faiDfaiJob.setResponsible(u);
 
-		Machine m = em.find(Machine.class, faiDfaiJob.getMachineId());
-		faiDfaiJob.setMachine(m);
+		if (!jobState.equals("agreement")) {
+			Machine m = em.find(Machine.class, faiDfaiJob.getMachineId());
+			faiDfaiJob.setMachine(m);
+		}
 
-		faiDfaiJob.setJobState("undone");
+		faiDfaiJob.setJobState(jobState);
 
 		if (faiDfaiJob.getId() == null) {
 			em.persist(faiDfaiJob);
@@ -103,7 +105,7 @@ public class JobServiceDao implements IJobServiceDao {
 
 	@Override
 	public List<FaiDfaiJob> getFaiDfaiJobs(Integer userId, String period,
-			String projectName) {
+			String projectName, String jobState) {
 		em = this.getEntityManager();
 		List<Integer> ids = new ArrayList<Integer>();
 
@@ -139,7 +141,7 @@ public class JobServiceDao implements IJobServiceDao {
 		}
 
 		String qString = "select u from FaiDfaiJob u where "
-				+ "(u.jobState = 'undone' or u.jobState is null)"
+				+ (jobState.equals("undone") ? "(u.jobState = 'undone' or u.jobState is null)" : "(u.jobState = '" + jobState + "')")
 				+ qParams
 				+ " order by u.fixtureStart, u.catiaStart, u.documentStart, u.benchStart";
 

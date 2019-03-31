@@ -9,7 +9,9 @@ Ext.require([ 'Portal.view.UserService.ManageUsersPanel',
 		'Portal.view.UserService.UserSkillPanel',
 		'Portal.view.FaiDfaiJobService.DoneFaiDfaiJobPanel',
 		'Portal.view.JobRequestService.JobRequestPanel',
-		'Portal.view.FeedbackService.FeedbackPanel' ]);
+		'Portal.view.FeedbackService.FeedbackPanel',
+		'Portal.view.MethodService.MethodPanel',
+		'Portal.view.AgreementService.AgreementPanel' ]);
 
 Ext
 		.define(
@@ -129,6 +131,74 @@ Ext
 									store.load();
 								}
 								tabPanel.setActiveTab('doneFaiDfaiJobPanel');
+							} else if (record.data.id == 'methodJob') {
+								if (!tabPanel.getChildByElement('methodPanel')) {
+									tabPanel.add({
+										xtype : 'methodpanel',
+										id : 'methodPanel',
+										title : 'Method Job',
+										closable : true
+									});
+									if (role != 'Admin' && role != 'PM') {
+										var filterForm = Ext.ComponentQuery
+												.query('methodfilterform')[0];
+										filterForm.setVisible(false);
+									}
+									if (role == 'PM') {
+										Ext.ComponentQuery
+												.query('#methodAddJob')[0]
+												.setVisible(false);
+										Ext.ComponentQuery
+												.query('#methodDeleteJob')[0]
+												.setVisible(false);
+										Ext.ComponentQuery
+												.query('#methodAddToFai')[0]
+												.setVisible(false);
+									}
+									var methodStore = Ext.data.StoreManager
+											.get("MethodStore");
+									if (role == 'PM') {
+										methodStore.getProxy().setExtraParam(
+												'userId', -1);
+									} else {
+										methodStore.getProxy().setExtraParam(
+												'userId', 0);
+									}
+									methodStore.getProxy().setExtraParam(
+											'period', '');
+									methodStore.getProxy().setExtraParam(
+											'projectName', '');
+									methodStore.load();
+								}
+								tabPanel.setActiveTab('methodPanel');
+							} else if (record.data.id == 'agreementJob') {
+								if (!tabPanel
+										.getChildByElement('agreementPanel')) {
+									tabPanel.add({
+										xtype : 'agreementpanel',
+										id : 'agreementPanel',
+										title : 'Agreement Job',
+										closable : true
+									});
+									if (role != 'Admin' && role != 'PM') {
+										var filterForm = Ext.ComponentQuery
+												.query('agreementfilterform')[0];
+										filterForm.setVisible(false);
+									}
+									var agreementStore = Ext.data.StoreManager
+											.get("AgreementStore");
+									if (role == 'PM') {
+										agreementStore.getProxy()
+												.setExtraParam('userId', -1);
+									} else {
+										agreementStore.getProxy()
+												.setExtraParam('userId', 0);
+									}
+									agreementStore.getProxy().setExtraParam(
+											'projectName', '');
+									agreementStore.load();
+								}
+								tabPanel.setActiveTab('agreementPanel');
 							} else if (record.data.id == 'otherJob') {
 								if (!tabPanel
 										.getChildByElement('otherJobPanel')) {

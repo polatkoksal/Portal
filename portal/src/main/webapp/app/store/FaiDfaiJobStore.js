@@ -16,7 +16,8 @@ Ext.define('Portal.store.FaiDfaiJobStore', {
 		extraParams : {
 			'userId' : '',
 			'period' : '',
-			'projectName' : ''
+			'projectName' : '',
+			'jobState' : 'undone'
 		},
 		reader : {
 			type : 'json',

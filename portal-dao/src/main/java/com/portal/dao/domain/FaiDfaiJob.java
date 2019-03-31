@@ -111,6 +111,90 @@ public class FaiDfaiJob implements Serializable {
 	@Column(name = "raw_heigth")
 	private Double rawHeigth;
 
+	@Column(name = "method_start")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date methodStart;
+
+	@Column(name = "method_end")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date methodEnd;
+
+	@Column(name = "dpr_data")
+	private Boolean dprData;
+
+	@Column(name = "configuration")
+	private Boolean configuration;
+
+	@Column(name = "product_tree")
+	private Boolean productTree;
+
+	@Column(name = "mp")
+	private Boolean mp;
+
+	@Column(name = "eng_and_cnc_folder")
+	private Boolean engAndCncFolder;
+
+	@Column(name = "fixture")
+	private Boolean fixture;
+
+	@Column(name = "catia_nc_product")
+	private Boolean catiaNcProduct;
+
+	@Column(name = "catia_cat_process")
+	private Boolean catiaCatProcess;
+
+	@Column(name = "obf_and_pmkf")
+	private Boolean obfAndPmkf;
+
+	@Column(name = "part_card")
+	private Boolean partCard;
+
+	@Column(name = "level", length = 255)
+	private String level;
+
+	@Column(name = "po_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date poDate;
+
+	@Column(name = "old_part_name", length = 255)
+	private String oldPartName;
+
+	@Column(name = "old_part_name_pl", length = 255)
+	private String oldPartNamePL;
+
+	@Column(name = "old_part_name_tr", length = 255)
+	private String oldPartNameTR;
+
+	@Column(name = "old_sub_part_name", length = 255)
+	private String oldSubPartName;
+
+	@Column(name = "old_sub_part_name_pl", length = 255)
+	private String oldSubPartNamePL;
+
+	@Column(name = "old_sub_part_name_tr", length = 255)
+	private String oldSubPartNameTR;
+
+	@Column(name = "new_part_name", length = 255)
+	private String newPartName;
+
+	@Column(name = "new_part_name_pl", length = 255)
+	private String newPartNamePL;
+
+	@Column(name = "new_part_name_tr", length = 255)
+	private String newPartNameTR;
+
+	@Column(name = "new_sub_part_name", length = 255)
+	private String newSubPartName;
+
+	@Column(name = "new_sub_part_name_pl", length = 255)
+	private String newSubPartNamePL;
+
+	@Column(name = "new_sub_part_name_tr", length = 255)
+	private String newSubPartNameTR;
+
+	@Column(name = "change_status", length = 255)
+	private String changeStatus;
+
 	@ManyToOne
 	@JoinColumn(name = "responsible")
 	private User responsible;
@@ -372,6 +456,222 @@ public class FaiDfaiJob implements Serializable {
 
 	public void setRawHeigth(Double rawHeigth) {
 		this.rawHeigth = rawHeigth;
+	}
+
+	public Date getMethodStart() {
+		return methodStart;
+	}
+
+	public void setMethodStart(Date methodStart) {
+		this.methodStart = methodStart;
+	}
+
+	public Date getMethodEnd() {
+		return methodEnd;
+	}
+
+	public void setMethodEnd(Date methodEnd) {
+		this.methodEnd = methodEnd;
+	}
+
+	public Boolean getDprData() {
+		return dprData;
+	}
+
+	public void setDprData(Boolean dprData) {
+		this.dprData = dprData;
+	}
+
+	public Boolean getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Boolean configuration) {
+		this.configuration = configuration;
+	}
+
+	public Boolean getProductTree() {
+		return productTree;
+	}
+
+	public void setProductTree(Boolean productTree) {
+		this.productTree = productTree;
+	}
+
+	public Boolean getMp() {
+		return mp;
+	}
+
+	public void setMp(Boolean mp) {
+		this.mp = mp;
+	}
+
+	public Boolean getEngAndCncFolder() {
+		return engAndCncFolder;
+	}
+
+	public void setEngAndCncFolder(Boolean engAndCncFolder) {
+		this.engAndCncFolder = engAndCncFolder;
+	}
+
+	public Boolean getFixture() {
+		return fixture;
+	}
+
+	public void setFixture(Boolean fixture) {
+		this.fixture = fixture;
+	}
+
+	public Boolean getCatiaNcProduct() {
+		return catiaNcProduct;
+	}
+
+	public void setCatiaNcProduct(Boolean catiaNcProduct) {
+		this.catiaNcProduct = catiaNcProduct;
+	}
+
+	public Boolean getCatiaCatProcess() {
+		return catiaCatProcess;
+	}
+
+	public void setCatiaCatProcess(Boolean catiaCatProcess) {
+		this.catiaCatProcess = catiaCatProcess;
+	}
+
+	public Boolean getObfAndPmkf() {
+		return obfAndPmkf;
+	}
+
+	public void setObfAndPmkf(Boolean obfAndPmkf) {
+		this.obfAndPmkf = obfAndPmkf;
+	}
+
+	public Boolean getPartCard() {
+		return partCard;
+	}
+
+	public void setPartCard(Boolean partCard) {
+		this.partCard = partCard;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public Date getPoDate() {
+		return poDate;
+	}
+
+	public void setPoDate(Date poDate) {
+		this.poDate = poDate;
+	}
+
+	public String getOldPartName() {
+		return oldPartName;
+	}
+
+	public void setOldPartName(String oldPartName) {
+		this.oldPartName = oldPartName;
+	}
+
+	public String getOldPartNamePL() {
+		return oldPartNamePL;
+	}
+
+	public void setOldPartNamePL(String oldPartNamePL) {
+		this.oldPartNamePL = oldPartNamePL;
+	}
+
+	public String getOldPartNameTR() {
+		return oldPartNameTR;
+	}
+
+	public void setOldPartNameTR(String oldPartNameTR) {
+		this.oldPartNameTR = oldPartNameTR;
+	}
+
+	public String getOldSubPartName() {
+		return oldSubPartName;
+	}
+
+	public void setOldSubPartName(String oldSubPartName) {
+		this.oldSubPartName = oldSubPartName;
+	}
+
+	public String getOldSubPartNamePL() {
+		return oldSubPartNamePL;
+	}
+
+	public void setOldSubPartNamePL(String oldSubPartNamePL) {
+		this.oldSubPartNamePL = oldSubPartNamePL;
+	}
+
+	public String getOldSubPartNameTR() {
+		return oldSubPartNameTR;
+	}
+
+	public void setOldSubPartNameTR(String oldSubPartNameTR) {
+		this.oldSubPartNameTR = oldSubPartNameTR;
+	}
+
+	public String getNewPartName() {
+		return newPartName;
+	}
+
+	public void setNewPartName(String newPartName) {
+		this.newPartName = newPartName;
+	}
+
+	public String getNewPartNamePL() {
+		return newPartNamePL;
+	}
+
+	public void setNewPartNamePL(String newPartNamePL) {
+		this.newPartNamePL = newPartNamePL;
+	}
+
+	public String getNewPartNameTR() {
+		return newPartNameTR;
+	}
+
+	public void setNewPartNameTR(String newPartNameTR) {
+		this.newPartNameTR = newPartNameTR;
+	}
+
+	public String getNewSubPartName() {
+		return newSubPartName;
+	}
+
+	public void setNewSubPartName(String newSubPartName) {
+		this.newSubPartName = newSubPartName;
+	}
+
+	public String getNewSubPartNamePL() {
+		return newSubPartNamePL;
+	}
+
+	public void setNewSubPartNamePL(String newSubPartNamePL) {
+		this.newSubPartNamePL = newSubPartNamePL;
+	}
+
+	public String getNewSubPartNameTR() {
+		return newSubPartNameTR;
+	}
+
+	public void setNewSubPartNameTR(String newSubPartNameTR) {
+		this.newSubPartNameTR = newSubPartNameTR;
+	}
+
+	public String getChangeStatus() {
+		return changeStatus;
+	}
+
+	public void setChangeStatus(String changeStatus) {
+		this.changeStatus = changeStatus;
 	}
 
 }

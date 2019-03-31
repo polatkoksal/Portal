@@ -137,6 +137,24 @@ public class WebHandler {
 			data.add(item9);
 		}
 		if (sessionUser.getRole().equals("Admin")
+				|| sessionUser.getRole().equals("User")
+				|| sessionUser.getRole().equals("PM")) {
+			MenuItem item10 = new MenuItem();
+			item10.setId("methodJob");
+			item10.setText("Method Job");
+			item10.setLeaf(true);
+			data.add(item10);
+		}
+		if (sessionUser.getRole().equals("Admin")
+				|| sessionUser.getRole().equals("User")
+				|| sessionUser.getRole().equals("PM")) {
+			MenuItem item11 = new MenuItem();
+			item11.setId("agreementJob");
+			item11.setText("Agreement Job");
+			item11.setLeaf(true);
+			data.add(item11);
+		}
+		if (sessionUser.getRole().equals("Admin")
 				|| sessionUser.getRole().equals("User")) {
 			MenuItem item4 = new MenuItem();
 			item4.setId("otherJob");
@@ -418,6 +436,11 @@ public class WebHandler {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		FaiDfaiJob fdj = new FaiDfaiJob();
 
+		String jobState = request.getParameter("jobState");
+		if (jobState == null || jobState.isEmpty()) {
+			jobState = "undone";
+		}
+
 		if (request.getParameter("id") != null
 				&& !"".equals(request.getParameter("id"))) {
 			fdj.setId(Integer.valueOf(request.getParameter("id")));
@@ -432,18 +455,21 @@ public class WebHandler {
 		fdj.setDescription(request.getParameter("description"));
 		fdj.setDocumentPercentage(request.getParameter("documentPercentage"));
 		fdj.setFixturePercentage(request.getParameter("fixturePercentage"));
-		fdj.setBenchEnd(sdf.parse(request.getParameter("benchEnd")));
-		fdj.setBenchStart(sdf.parse(request.getParameter("benchStart")));
-		fdj.setCatiaEnd(sdf.parse(request.getParameter("catiaEnd")));
-		fdj.setCatiaStart(sdf.parse(request.getParameter("catiaStart")));
-		fdj.setDocumentEnd(sdf.parse(request.getParameter("documentEnd")));
-		fdj.setDocumentStart(sdf.parse(request.getParameter("documentStart")));
 		fdj.setDrpNumber(request.getParameter("drpNumber"));
-		fdj.setFixtureEnd(sdf.parse(request.getParameter("fixtureEnd")));
-		fdj.setFixtureStart(sdf.parse(request.getParameter("fixtureStart")));
 		fdj.setPartNumber(request.getParameter("partNumber"));
 		fdj.setResponsibleId(Integer.valueOf(request
 				.getParameter("responsible")));
+		if (jobState.equals("undone")) {
+			fdj.setBenchEnd(sdf.parse(request.getParameter("benchEnd")));
+			fdj.setBenchStart(sdf.parse(request.getParameter("benchStart")));
+			fdj.setCatiaEnd(sdf.parse(request.getParameter("catiaEnd")));
+			fdj.setCatiaStart(sdf.parse(request.getParameter("catiaStart")));
+			fdj.setDocumentEnd(sdf.parse(request.getParameter("documentEnd")));
+			fdj.setDocumentStart(sdf.parse(request
+					.getParameter("documentStart")));
+			fdj.setFixtureEnd(sdf.parse(request.getParameter("fixtureEnd")));
+			fdj.setFixtureStart(sdf.parse(request.getParameter("fixtureStart")));
+		}
 		if (request.getParameter("rawWidth") != null
 				&& !"".equals(request.getParameter("rawWidth"))) {
 			fdj.setRawWidth(Double.valueOf(request.getParameter("rawWidth")));
@@ -456,9 +482,52 @@ public class WebHandler {
 				&& !"".equals(request.getParameter("rawHeigth"))) {
 			fdj.setRawHeigth(Double.valueOf(request.getParameter("rawHeigth")));
 		}
-		fdj.setMachineId(Integer.valueOf(request.getParameter("machine")));
 
-		jobServiceDao.createUpdateFaiDfaiJob(fdj);
+		if (!jobState.equals("agreement")) {
+			fdj.setMachineId(Integer.valueOf(request.getParameter("machine")));
+		}
+
+		if (jobState.equals("method")) {
+			fdj.setMethodStart(sdf.parse(request.getParameter("methodStart")));
+			fdj.setMethodEnd(sdf.parse(request.getParameter("methodEnd")));
+			fdj.setDprData(request.getParameter("dprData") != null ? true
+					: false);
+			fdj.setConfiguration(request.getParameter("configuration") != null ? true
+					: false);
+			fdj.setProductTree(request.getParameter("productTree") != null ? true
+					: false);
+			fdj.setMp(request.getParameter("mp") != null ? true : false);
+			fdj.setEngAndCncFolder(request.getParameter("engAndCncFolder") != null ? true
+					: false);
+			fdj.setFixture(request.getParameter("fixture") != null ? true
+					: false);
+			fdj.setCatiaNcProduct(request.getParameter("catiaNcProduct") != null ? true
+					: false);
+			fdj.setCatiaCatProcess(request.getParameter("catiaCatProcess") != null ? true
+					: false);
+			fdj.setObfAndPmkf(request.getParameter("obfAndPmkf") != null ? true
+					: false);
+			fdj.setPartCard(request.getParameter("partCard") != null ? true
+					: false);
+		} else if (jobState.equals("agreement")) {
+			fdj.setLevel(request.getParameter("level"));
+			fdj.setPoDate(sdf.parse(request.getParameter("poDate")));
+			fdj.setOldPartName(request.getParameter("oldPartName"));
+			fdj.setOldPartNamePL(request.getParameter("oldPartNamePL"));
+			fdj.setOldPartNameTR(request.getParameter("oldPartNameTR"));
+			fdj.setOldSubPartName(request.getParameter("oldSubPartName"));
+			fdj.setOldSubPartNamePL(request.getParameter("oldSubPartNamePL"));
+			fdj.setOldSubPartNameTR(request.getParameter("oldSubPartNameTR"));
+			fdj.setNewPartName(request.getParameter("newPartName"));
+			fdj.setNewPartNamePL(request.getParameter("newPartNamePL"));
+			fdj.setNewPartNameTR(request.getParameter("newPartNameTR"));
+			fdj.setNewSubPartName(request.getParameter("newSubPartName"));
+			fdj.setNewSubPartNamePL(request.getParameter("newSubPartNamePL"));
+			fdj.setNewSubPartNameTR(request.getParameter("newSubPartNameTR"));
+			fdj.setChangeStatus(request.getParameter("changeStatus"));
+		}
+
+		jobServiceDao.createUpdateFaiDfaiJob(fdj, jobState);
 
 		response.setStatus(HttpServletResponse.SC_OK);
 		try (PrintWriter out = response.getWriter()) {
@@ -611,13 +680,20 @@ public class WebHandler {
 		Integer userId = Integer.valueOf(request.getParameter("userId"));
 		String period = request.getParameter("period");
 		String projectName = request.getParameter("projectName");
+
+		String jobState = request.getParameter("jobState");
+		if (jobState == null || jobState.isEmpty()) {
+			jobState = "undone";
+		}
+
 		if (userId == 0) {
 			User sessionUser = (User) request.getSession().getAttribute(
 					"sessionUser");
 			userId = sessionUser.getId();
 		}
 
-		faiDfaiJobs = jobServiceDao.getFaiDfaiJobs(userId, period, projectName);
+		faiDfaiJobs = jobServiceDao.getFaiDfaiJobs(userId, period, projectName,
+				jobState);
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -629,20 +705,53 @@ public class WebHandler {
 			fI.setProjectName(f.getProjectName());
 			fI.setCategory(f.getCategory());
 			fI.setPeriod(f.getPeriod());
-			fI.setBenchEnd(sdf.format((f.getBenchEnd())));
-			fI.setBenchPercentage(f.getBenchPercentage());
-			fI.setBenchStart(sdf.format(f.getBenchStart()));
-			fI.setCatiaEnd(sdf.format(f.getCatiaEnd()));
-			fI.setCatiaPercentage(f.getCatiaPercentage());
-			fI.setCatiaStart(sdf.format(f.getCatiaStart()));
 			fI.setDescription(f.getDescription());
-			fI.setDocumentEnd(sdf.format(f.getDocumentEnd()));
-			fI.setDocumentPercentage(f.getDocumentPercentage());
-			fI.setDocumentStart(sdf.format(f.getDocumentStart()));
 			fI.setDrpNumber(f.getDrpNumber());
-			fI.setFixtureEnd(sdf.format(f.getFixtureEnd()));
-			fI.setFixturePercentage(f.getFixturePercentage());
-			fI.setFixtureStart(sdf.format(f.getFixtureStart()));
+			if (jobState.equals("undone")) {
+				fI.setBenchEnd(sdf.format(f.getBenchEnd()));
+				fI.setBenchPercentage(f.getBenchPercentage());
+				fI.setBenchStart(sdf.format(f.getBenchStart()));
+				fI.setCatiaEnd(sdf.format(f.getCatiaEnd()));
+				fI.setCatiaPercentage(f.getCatiaPercentage());
+				fI.setCatiaStart(sdf.format(f.getCatiaStart()));
+				fI.setDocumentEnd(sdf.format(f.getDocumentEnd()));
+				fI.setDocumentPercentage(f.getDocumentPercentage());
+				fI.setDocumentStart(sdf.format(f.getDocumentStart()));
+				fI.setFixtureEnd(sdf.format(f.getFixtureEnd()));
+				fI.setFixturePercentage(f.getFixturePercentage());
+				fI.setFixtureStart(sdf.format(f.getFixtureStart()));
+			}
+			if (jobState.equals("method")) {
+				fI.setMethodStart(sdf.format(f.getMethodStart()));
+				fI.setMethodEnd(sdf.format(f.getMethodEnd()));
+				fI.setDprData(f.getDprData());
+				fI.setConfiguration(f.getConfiguration());
+				fI.setProductTree(f.getProductTree());
+				fI.setMp(f.getMp());
+				fI.setEngAndCncFolder(f.getEngAndCncFolder());
+				fI.setFixture(f.getFixture());
+				fI.setCatiaNcProduct(f.getCatiaNcProduct());
+				fI.setCatiaCatProcess(f.getCatiaCatProcess());
+				fI.setObfAndPmkf(f.getObfAndPmkf());
+				fI.setPartCard(f.getPartCard());
+			}
+			if (jobState.equals("agreement")) {
+				fI.setLevel(f.getLevel());
+				fI.setPoDate(sdf.format(f.getPoDate()));
+				fI.setOldPartName(f.getOldPartName());
+				fI.setOldPartNamePL(f.getOldPartNamePL());
+				fI.setOldPartNameTR(f.getOldPartNameTR());
+				fI.setOldSubPartName(f.getOldSubPartName());
+				fI.setOldSubPartNamePL(f.getOldSubPartNamePL());
+				fI.setOldSubPartNameTR(f.getOldSubPartNameTR());
+				fI.setNewPartName(f.getNewPartName());
+				fI.setNewPartNamePL(f.getNewPartNamePL());
+				fI.setNewPartNameTR(f.getNewPartNameTR());
+				fI.setNewSubPartName(f.getNewSubPartName());
+				fI.setNewSubPartNamePL(f.getNewSubPartNamePL());
+				fI.setNewSubPartNameTR(f.getNewSubPartNameTR());
+				fI.setChangeStatus(f.getChangeStatus());
+			}
 			fI.setId(f.getId());
 			fI.setPartNumber(f.getPartNumber());
 			if (f.getResponsible() != null) {

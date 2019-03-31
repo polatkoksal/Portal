@@ -1,8 +1,11 @@
 package com.portal.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 public class FaiDfaiJobItem implements Serializable {
 
@@ -37,6 +40,33 @@ public class FaiDfaiJobItem implements Serializable {
 	private Double rawWidth;
 	private Double rawLength;
 	private Double rawHeigth;
+	private String methodStart;
+	private String methodEnd;
+	private Boolean dprData;
+	private Boolean configuration;
+	private Boolean productTree;
+	private Boolean mp;
+	private Boolean engAndCncFolder;
+	private Boolean fixture;
+	private Boolean catiaNcProduct;
+	private Boolean catiaCatProcess;
+	private Boolean obfAndPmkf;
+	private Boolean partCard;
+	private String level;
+	private String poDate;
+	private String oldPartName;
+	private String oldPartNamePL;
+	private String oldPartNameTR;
+	private String oldSubPartName;
+	private String oldSubPartNamePL;
+	private String oldSubPartNameTR;
+	private String newPartName;
+	private String newPartNamePL;
+	private String newPartNameTR;
+	private String newSubPartName;
+	private String newSubPartNamePL;
+	private String newSubPartNameTR;
+	private String changeStatus;
 
 	public Integer getId() {
 		return id;
@@ -268,6 +298,222 @@ public class FaiDfaiJobItem implements Serializable {
 
 	public void setRawHeigth(Double rawHeigth) {
 		this.rawHeigth = rawHeigth;
+	}
+
+	public String getMethodStart() {
+		return methodStart;
+	}
+
+	public void setMethodStart(String methodStart) {
+		this.methodStart = methodStart;
+	}
+
+	public String getMethodEnd() {
+		return methodEnd;
+	}
+
+	public void setMethodEnd(String methodEnd) {
+		this.methodEnd = methodEnd;
+	}
+
+	public Boolean getDprData() {
+		return dprData;
+	}
+
+	public void setDprData(Boolean dprData) {
+		this.dprData = dprData;
+	}
+
+	public Boolean getConfiguration() {
+		return configuration;
+	}
+
+	public void setConfiguration(Boolean configuration) {
+		this.configuration = configuration;
+	}
+
+	public Boolean getProductTree() {
+		return productTree;
+	}
+
+	public void setProductTree(Boolean productTree) {
+		this.productTree = productTree;
+	}
+
+	public Boolean getMp() {
+		return mp;
+	}
+
+	public void setMp(Boolean mp) {
+		this.mp = mp;
+	}
+
+	public Boolean getEngAndCncFolder() {
+		return engAndCncFolder;
+	}
+
+	public void setEngAndCncFolder(Boolean engAndCncFolder) {
+		this.engAndCncFolder = engAndCncFolder;
+	}
+
+	public Boolean getFixture() {
+		return fixture;
+	}
+
+	public void setFixture(Boolean fixture) {
+		this.fixture = fixture;
+	}
+
+	public Boolean getCatiaNcProduct() {
+		return catiaNcProduct;
+	}
+
+	public void setCatiaNcProduct(Boolean catiaNcProduct) {
+		this.catiaNcProduct = catiaNcProduct;
+	}
+
+	public Boolean getCatiaCatProcess() {
+		return catiaCatProcess;
+	}
+
+	public void setCatiaCatProcess(Boolean catiaCatProcess) {
+		this.catiaCatProcess = catiaCatProcess;
+	}
+
+	public Boolean getObfAndPmkf() {
+		return obfAndPmkf;
+	}
+
+	public void setObfAndPmkf(Boolean obfAndPmkf) {
+		this.obfAndPmkf = obfAndPmkf;
+	}
+
+	public Boolean getPartCard() {
+		return partCard;
+	}
+
+	public void setPartCard(Boolean partCard) {
+		this.partCard = partCard;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getPoDate() {
+		return poDate;
+	}
+
+	public void setPoDate(String poDate) {
+		this.poDate = poDate;
+	}
+
+	public String getOldPartName() {
+		return oldPartName;
+	}
+
+	public void setOldPartName(String oldPartName) {
+		this.oldPartName = oldPartName;
+	}
+
+	public String getOldPartNamePL() {
+		return oldPartNamePL;
+	}
+
+	public void setOldPartNamePL(String oldPartNamePL) {
+		this.oldPartNamePL = oldPartNamePL;
+	}
+
+	public String getOldPartNameTR() {
+		return oldPartNameTR;
+	}
+
+	public void setOldPartNameTR(String oldPartNameTR) {
+		this.oldPartNameTR = oldPartNameTR;
+	}
+
+	public String getOldSubPartName() {
+		return oldSubPartName;
+	}
+
+	public void setOldSubPartName(String oldSubPartName) {
+		this.oldSubPartName = oldSubPartName;
+	}
+
+	public String getOldSubPartNamePL() {
+		return oldSubPartNamePL;
+	}
+
+	public void setOldSubPartNamePL(String oldSubPartNamePL) {
+		this.oldSubPartNamePL = oldSubPartNamePL;
+	}
+
+	public String getOldSubPartNameTR() {
+		return oldSubPartNameTR;
+	}
+
+	public void setOldSubPartNameTR(String oldSubPartNameTR) {
+		this.oldSubPartNameTR = oldSubPartNameTR;
+	}
+
+	public String getNewPartName() {
+		return newPartName;
+	}
+
+	public void setNewPartName(String newPartName) {
+		this.newPartName = newPartName;
+	}
+
+	public String getNewPartNamePL() {
+		return newPartNamePL;
+	}
+
+	public void setNewPartNamePL(String newPartNamePL) {
+		this.newPartNamePL = newPartNamePL;
+	}
+
+	public String getNewPartNameTR() {
+		return newPartNameTR;
+	}
+
+	public void setNewPartNameTR(String newPartNameTR) {
+		this.newPartNameTR = newPartNameTR;
+	}
+
+	public String getNewSubPartName() {
+		return newSubPartName;
+	}
+
+	public void setNewSubPartName(String newSubPartName) {
+		this.newSubPartName = newSubPartName;
+	}
+
+	public String getNewSubPartNamePL() {
+		return newSubPartNamePL;
+	}
+
+	public void setNewSubPartNamePL(String newSubPartNamePL) {
+		this.newSubPartNamePL = newSubPartNamePL;
+	}
+
+	public String getNewSubPartNameTR() {
+		return newSubPartNameTR;
+	}
+
+	public void setNewSubPartNameTR(String newSubPartNameTR) {
+		this.newSubPartNameTR = newSubPartNameTR;
+	}
+
+	public String getChangeStatus() {
+		return changeStatus;
+	}
+
+	public void setChangeStatus(String changeStatus) {
+		this.changeStatus = changeStatus;
 	}
 
 }

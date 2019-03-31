@@ -328,6 +328,8 @@ Ext
 																				.query('#faiDfaiJobUpdateForm')[0];
 																		var faiDfaiJobStore = Ext.data.StoreManager
 																				.get("FaiDfaiJobStore");
+																		var methodStore = Ext.data.StoreManager
+																				.get("MethodStore");
 																		if (form
 																				.isValid()) {
 																			form
@@ -342,6 +344,8 @@ Ext
 																							formTab
 																									.close();
 																							faiDfaiJobStore
+																									.load();
+																							methodStore
 																									.load();
 																						},
 																						failure : function(

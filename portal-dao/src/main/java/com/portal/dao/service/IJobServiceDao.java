@@ -11,13 +11,13 @@ import com.portal.dao.domain.OtherJob;
 
 public interface IJobServiceDao {
 
-	public Boolean createUpdateFaiDfaiJob(FaiDfaiJob faiDfaiJob);
+	public Boolean createUpdateFaiDfaiJob(FaiDfaiJob faiDfaiJob, String jobState);
 
 	public Boolean createUpdateJobRequest(Integer responsibleId,
 			FaiDfaiJob faiDfaiJob);
 
 	public List<FaiDfaiJob> getFaiDfaiJobs(Integer userId, String period,
-			String projectName);
+			String projectName, String jobState);
 
 	public List<FaiDfaiJob> getJobRequests(Integer userId, String period,
 			String projectName);
