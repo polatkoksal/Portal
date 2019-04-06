@@ -6,7 +6,8 @@ Ext
 					alias : 'widget.jobrequestfilterform',
 					requires : [
 							'Portal.view.JobRequestService.JobRequestAddForm',
-							'Portal.view.FaiDfaiJobService.FaiDfaiJobUpdateForm' ],
+							'Portal.view.FaiDfaiJobService.FaiDfaiJobUpdateForm',
+							'Portal.view.MethodService.MethodUpdateForm' ],
 					items : [
 							{
 								xtype : 'combobox',
@@ -139,22 +140,81 @@ Ext
 											Ext.ComponentQuery
 													.query('#faiDfaiJobUpdateForm')[0]
 													.loadRecord(record);
-											
-											var machineId = record.get('machineId');
+
+											var machineId = record
+													.get('machineId');
 											if (!isNaN(machineId)) {
 												var machineStore = Ext.data.StoreManager
 														.get("MachineStore");
 												var machine = Ext.ComponentQuery
 														.query('#faiDfaiMachine2')[0];
-												machineStore.load({
-													callback : function() {
-														machine.setValue(machineId);
-													}
-												});
+												machineStore
+														.load({
+															callback : function() {
+																machine
+																		.setValue(machineId);
+															}
+														});
 											}
 										}
 										tabPanel
 												.setActiveTab("faiDfaiJobUpdateForm");
+									} else {
+										Ext.Msg
+												.alert('Warning',
+														'You should select a job request.');
+									}
+								}
+							},
+							{
+
+								xtype : 'button',
+								id : 'jobRequestAddMethodJob',
+								text : 'Add Request to Method Job',
+								margin : '4px',
+								handler : function() {
+									var grid = Ext.ComponentQuery
+											.query('jobrequestgrid')[0];
+									if (grid.getSelectionModel().hasSelection()) {
+										var tabPanel = Ext.ComponentQuery
+												.query('tabpanel')[0];
+										if (!tabPanel
+												.getChildByElement('methodUpdateForm')) {
+											tabPanel
+													.add({
+														xtype : 'methodupdateform',
+														id : 'methodUpdateForm',
+														title : 'Add Request to Method Job',
+														closable : true
+													})
+											var store = Ext.data.StoreManager
+													.get("JobRequestStore");
+											var record = store.getById(grid
+													.getSelectionModel()
+													.getSelection()[0]
+													.get('id'))
+											Ext.ComponentQuery
+													.query('#methodUpdateForm')[0]
+													.loadRecord(record);
+
+											var machineId = record
+													.get('machineId');
+											if (!isNaN(machineId)) {
+												var machineStore = Ext.data.StoreManager
+														.get("MachineStore");
+												var machine = Ext.ComponentQuery
+														.query('#methodMachine2')[0];
+												machineStore
+														.load({
+															callback : function() {
+																machine
+																		.setValue(machineId);
+															}
+														});
+											}
+										}
+										tabPanel
+												.setActiveTab("methodUpdateForm");
 									} else {
 										Ext.Msg
 												.alert('Warning',

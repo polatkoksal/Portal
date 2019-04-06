@@ -278,6 +278,8 @@ Ext
 														.get("MethodStore");
 												var agreementStore = Ext.data.StoreManager
 														.get("AgreementStore");
+												var jobRequestStore = Ext.data.StoreManager
+														.get("JobRequestStore");
 												if (form.isValid()) {
 													form
 															.submit({
@@ -293,6 +295,8 @@ Ext
 																	methodStore
 																			.load();
 																	agreementStore
+																			.load();
+																	jobRequestStore
 																			.load();
 																},
 																failure : function(

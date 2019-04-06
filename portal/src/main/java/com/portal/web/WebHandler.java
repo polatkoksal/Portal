@@ -146,7 +146,6 @@ public class WebHandler {
 			data.add(item10);
 		}
 		if (sessionUser.getRole().equals("Admin")
-				|| sessionUser.getRole().equals("User")
 				|| sessionUser.getRole().equals("PM")) {
 			MenuItem item11 = new MenuItem();
 			item11.setId("agreementJob");
