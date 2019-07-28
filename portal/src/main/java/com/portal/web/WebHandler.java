@@ -628,6 +628,7 @@ public class WebHandler {
 	public void createUpdateJobRequest(HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		response.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		User sessionUser = (User) request.getSession().getAttribute(
 				"sessionUser");
@@ -645,7 +646,15 @@ public class WebHandler {
 		fdj.setDescription(request.getParameter("description"));
 		fdj.setDrpNumber(request.getParameter("drpNumber"));
 		fdj.setPartNumber(request.getParameter("partNumber"));
-
+		if (request.getParameter("requestDate") != null
+				&& !"".equals(request.getParameter("requestDate"))) {
+			fdj.setRequestDate(sdf.parse(request.getParameter("requestDate")));
+		}
+		if (request.getParameter("requestCompletionDate") != null
+				&& !"".equals(request.getParameter("requestCompletionDate"))) {
+			fdj.setRequestCompletionDate(sdf.parse(request
+					.getParameter("requestCompletionDate")));
+		}
 		jobServiceDao.createUpdateJobRequest(sessionUser.getId(), fdj);
 
 		response.setStatus(HttpServletResponse.SC_OK);
@@ -861,6 +870,8 @@ public class WebHandler {
 	public void getJobRequests(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ParseException {
 		response.setCharacterEncoding("UTF-8");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
 		List<FaiDfaiJob> faiDfaiJobs;
 		Integer userId = Integer.valueOf(request.getParameter("userId"));
 		String period = request.getParameter("period");
@@ -892,6 +903,14 @@ public class WebHandler {
 				fI.setMachineName(f.getMachine().getName());
 				fI.setMachineId(f.getMachine().getId());
 			}
+			if (f.getRequestDate() != null) {
+				fI.setRequestDate(sdf.format(f.getRequestDate()));
+			}
+			if (f.getRequestCompletionDate() != null) {
+				fI.setRequestCompletionDate(sdf.format(f
+						.getRequestCompletionDate()));
+			}
+
 			faiDfaiJobItems.add(fI);
 		}
 		ResultData<FaiDfaiJobItem> resultData = new ResultData<FaiDfaiJobItem>();

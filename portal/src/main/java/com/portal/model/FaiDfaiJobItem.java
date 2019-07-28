@@ -67,6 +67,8 @@ public class FaiDfaiJobItem implements Serializable {
 	private String newSubPartNamePL;
 	private String newSubPartNameTR;
 	private String changeStatus;
+	private String requestDate;
+	private String requestCompletionDate;
 
 	public Integer getId() {
 		return id;
@@ -514,6 +516,22 @@ public class FaiDfaiJobItem implements Serializable {
 
 	public void setChangeStatus(String changeStatus) {
 		this.changeStatus = changeStatus;
+	}
+
+	public String getRequestDate() {
+		return requestDate;
+	}
+
+	public void setRequestDate(String requestDate) {
+		this.requestDate = requestDate;
+	}
+
+	public String getRequestCompletionDate() {
+		return requestCompletionDate;
+	}
+
+	public void setRequestCompletionDate(String requestCompletionDate) {
+		this.requestCompletionDate = requestCompletionDate;
 	}
 
 }

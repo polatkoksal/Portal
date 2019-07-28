@@ -195,6 +195,14 @@ public class FaiDfaiJob implements Serializable {
 	@Column(name = "change_status", length = 255)
 	private String changeStatus;
 
+	@Column(name = "request_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date requestDate;
+
+	@Column(name = "request_completion_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date requestCompletionDate;
+
 	@ManyToOne
 	@JoinColumn(name = "responsible")
 	private User responsible;
@@ -672,6 +680,22 @@ public class FaiDfaiJob implements Serializable {
 
 	public void setChangeStatus(String changeStatus) {
 		this.changeStatus = changeStatus;
+	}
+
+	public Date getRequestDate() {
+		return requestDate;
+	}
+
+	public void setRequestDate(Date requestDate) {
+		this.requestDate = requestDate;
+	}
+
+	public Date getRequestCompletionDate() {
+		return requestCompletionDate;
+	}
+
+	public void setRequestCompletionDate(Date requestCompletionDate) {
+		this.requestCompletionDate = requestCompletionDate;
 	}
 
 }

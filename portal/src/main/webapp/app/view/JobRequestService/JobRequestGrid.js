@@ -8,13 +8,13 @@ Ext
 					store : 'JobRequestStore',
 					height : 500,
 					columns : [ {
-						header : 'Period',
-						dataIndex : 'period',
-						width : 120
+						header : 'Request Date',
+						dataIndex : 'requestDate',
+						width : 100
 					}, {
-						header : 'Project Name',
-						dataIndex : 'projectName',
-						width : 120
+						header : 'Request Completion Date',
+						dataIndex : 'requestCompletionDate',
+						width : 150
 					}, {
 						header : 'Category',
 						dataIndex : 'category',
@@ -36,7 +36,7 @@ Ext
 						dataIndex : 'machineName',
 						width : 120
 					}, {
-						header : 'Responsible',
+						header : 'Requested By',
 						dataIndex : 'nameSurname',
 						width : 120
 					}, {

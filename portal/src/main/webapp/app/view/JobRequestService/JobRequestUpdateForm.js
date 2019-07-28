@@ -26,12 +26,24 @@ Ext
 											layout : 'vbox',
 											items : [
 													{
-														xtype : 'numberfield',
-														fieldLabel : 'Period',
-														id : 'jobRequestPeriod2',
-														name : 'period',
-														minValue : 1,
-														maxValue : 52,
+														xtype : 'datefield',
+														fieldLabel : 'Request Date',
+														id : 'jobRequestDate2',
+														name : 'requestDate',
+														value : new Date(),
+														format : 'd/m/Y',
+														editable : false,
+														margin : '4px',
+														width : 500
+													},
+													{
+														xtype : 'datefield',
+														fieldLabel : 'Request Completion Date',
+														id : 'jobRequestCompletionDate2',
+														name : 'requestCompletionDate',
+														value : new Date(),
+														format : 'd/m/Y',
+														editable : false,
 														margin : '4px',
 														width : 500
 													},
@@ -99,43 +111,80 @@ Ext
 														height : 100
 													},
 													{
-														xtype : 'button',
-														id : 'jobRequestAddSave2',
-														text : 'Save',
-														margin : '4px',
-														handler : function() {
-															var form = Ext.ComponentQuery
-																	.query('jobrequestupdateform')[0];
-															var formTab = Ext.ComponentQuery
-																	.query('#jobRequestUpdateForm')[0];
-															var jobRequestStore = Ext.data.StoreManager
-																	.get("JobRequestStore");
-															if (form.isValid()) {
-																form
-																		.submit({
-																			success : function(
-																					form,
-																					action) {
-																				Ext.Msg
-																						.alert(
-																								'Info',
-																								'Job request is updated');
-																				formTab
-																						.close();
-																				jobRequestStore
-																						.load();
-																			},
-																			failure : function(
-																					form,
-																					action) {
-																				Ext.Msg
-																						.alert(
-																								'Error',
-																								'Job request update failed.');
-																			}
-																		});
-															}
-														}
+														xtype : 'container',
+														layout : 'hbox',
+														items : [
+																{
+																	xtype : 'button',
+																	id : 'jobRequestAddSave2',
+																	text : 'Save',
+																	margin : '4px',
+																	handler : function() {
+																		var form = Ext.ComponentQuery
+																				.query('jobrequestupdateform')[0];
+																		var formTab = Ext.ComponentQuery
+																				.query('#jobRequestUpdateForm')[0];
+																		var jobRequestStore = Ext.data.StoreManager
+																				.get("JobRequestStore");
+																		if (form
+																				.isValid()) {
+																			form
+																					.submit({
+																						success : function(
+																								form,
+																								action) {
+																							Ext.Msg
+																									.alert(
+																											'Info',
+																											'Job request is updated');
+																							formTab
+																									.close();
+																							jobRequestStore
+																									.load();
+																						},
+																						failure : function(
+																								form,
+																								action) {
+																							Ext.Msg
+																									.alert(
+																											'Error',
+																											'Job request update failed.');
+																						}
+																					});
+																		}
+																	}
+																},
+																{
+																	xtype : 'button',
+																	id : 'jobRequestShowPdf',
+																	text : 'Display PDF',
+																	margin : '4px',
+																	handler : function() {
+																		var fileName = Ext.ComponentQuery
+																				.query('#jobRequestPartNumber2')[0]
+																				.getValue();
+																		Ext
+																				.create(
+																						'Ext.window.Window',
+																						{
+																							title : 'PDF Content',
+																							width : 850,
+																							height : 500,
+																							modal : true,
+																							layout : 'fit',
+																							items : [ {
+																								xtype : 'component',
+																								autoEl : {
+																									tag : 'iframe',
+																									id : 'iframe-win-fai',
+																									src : 'getPdfFile?fileName='
+																											+ fileName
+																								}
+																							} ]
+																						})
+																				.show();
+																	}
+																} ]
 													} ]
 										}, {
 											xtype : 'image',

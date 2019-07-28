@@ -8,12 +8,23 @@ Ext.define('Portal.view.JobRequestService.JobRequestAddForm', {
 		id : 'jobRequestHiddenId',
 		name : 'id'
 	}, {
-		xtype : 'numberfield',
-		fieldLabel : 'Period',
-		id : 'jobRequestPeriod',
-		name : 'period',
-		minValue : 1,
-		maxValue : 52,
+		xtype : 'datefield',
+		fieldLabel : 'Request Date',
+		id : 'jobRequestDate',
+		name : 'requestDate',
+		value : new Date(),
+		format : 'd/m/Y',
+		editable : false,
+		margin : '4px',
+		width : 500
+	}, {
+		xtype : 'datefield',
+		fieldLabel : 'Request Completion Date',
+		id : 'jobRequestCompletionDate',
+		name : 'requestCompletionDate',
+		value : new Date(),
+		format : 'd/m/Y',
+		editable : false,
 		margin : '4px',
 		width : 500
 	}, {
