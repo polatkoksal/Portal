@@ -16,6 +16,10 @@ Ext
 						dataIndex : 'requestCompletionDate',
 						width : 150
 					}, {
+						header : 'Project Name',
+						dataIndex : 'projectName',
+						width : 150
+					}, {
 						header : 'Category',
 						dataIndex : 'category',
 						width : 120
